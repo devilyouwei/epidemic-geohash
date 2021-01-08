@@ -7,7 +7,7 @@ build:
     stage: build
     script:
         - pdflatex geohash.tex
-        - bibtext geohash
+        - bibtex geohash
         - pdflatex geohash.tex
         - pdflatex geohash.tex
 
