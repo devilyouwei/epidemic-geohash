@@ -1,10 +1,10 @@
-image: mormahr/latex-full
 stages:
     - build
     - deploy
 
 build:
     stage: build
+    image: mormahr/latex-full
     script:
         - pdflatex geohash.tex
         - bibtex geohash
@@ -13,5 +13,8 @@ build:
 
 deploy:
     stage: deploy
+    image: takkatakka/lftp
+    only:
+        - master
     script:
         - bash ./deploy.sh
