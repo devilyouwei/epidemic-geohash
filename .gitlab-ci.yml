@@ -1,0 +1,17 @@
+image: mormahr/latex-full
+stages:
+    - build
+    - deploy
+
+build:
+    stage: build
+    script:
+        - pdflatex geohash.tex
+        - bibtext geohash
+        - pdflatex geohash.tex
+        - pdflatex geohash.tex
+
+deploy:
+    stage: deploy
+    script:
+        - bash ./deploy.sh
