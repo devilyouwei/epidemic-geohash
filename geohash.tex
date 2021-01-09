@@ -30,6 +30,7 @@
 \affiliation{%
 	\institution{Institute of Intelligent Computing Technology, Chinese Academy of Sciences}
 	\city{Suzhou}
+	\state{Jiangsu}
 	\country{China}
 	\postcode{215000}
 }
@@ -58,16 +59,16 @@
 	\textbf{GeoHash} is a public domain geocode system invented in 2008 by Gustavo Niemeyer\cite{niemeyer2008geohash}.
 	We divide a map into several grids and use \textbf{GeoHash} to encode the information of each grid.
 	Through the computer visualization technology, \textbf{GeoHash} can be easily restored to original digital map.
-	The map is mainly used for epidemic prevention and control, so is named \textbf{'Epidemic Map'}. Each grid on such \textbf{epidemic map} includes the information of regional security and other important attributes which are concerned by medical work.
-	Dynamic grids on the map can be scaled for monitoring area ranges of different sizes.
+	The map is mainly used for epidemic prevention and control, so is named \textbf{"Epidemic Map"}. Each grid on such \textbf{epidemic map} includes the information of regional security and other important characteristics which are concerned by medical work.
+	Dynamic grids on the map can be scaled for monitoring area of different scopes.
 	The information and the results of information analysis on each grid are of great help to epidemic prevention.
 	Such kind of geographic information system, or GeoHash technology can be used not only for controlling COVID-19, but also for other infectious diseases.
 \end{abstract}
 
-\keywords{GeoHash, COVID-19, big data, ASI, contagious, geography, division}
+\keywords{GeoHash, COVID-19, big data, ASI, epidemic prevention and control, visual analysis, infectious  disease}
 
 \begin{teaserfigure}
-	\centering\includegraphics[height=45mm]{logo}
+	\centering\includegraphics[height=50mm]{logo}
 	\caption{GeoHash technology for geographic grid division}
 	\Description{In 2008, Gustavo Niemeyer invented GeoHash which encoded a geographic location into a short string}
 	\label{fig:teaser}
@@ -85,12 +86,36 @@ Lockdown meant the whole region was quarantined and cut off physical contact wit
 The citizens were forbidden to leave their city or even their houses.
 The national medical team carried out centralized medical observation and treatment in quarantined cities.
 And such quarantine makes positive effects on preventing the spread of coronavirus.
-Research shows, COVID-19 spread became weaker following lockdown.\cite{lau2020positive}
-However the lockdown of a city can cause huge economic losses. The wider the lockdown, the greater the impact.
-Cities, states or provinces all over the world have different administrative areas in different sizes and irregular geographic shapes.
+Research shows, COVID-19 spread became weaker following lockdown\cite{lau2020positive}.
+However the lockdown of a city can cause huge economic losses.
 The lockdown of Some vital areas can cause irreparable losses, such as financial center, political center, industrial dependent cities.
-There may be outbreaks in some cities, but it does not mean that it spreads to all corners of the city. On the contrary, there is no epidemic in the center of neighboring cities, but there may already be a huge risk at the border with the city.
-Based on above point of view, it is not the best way to observe and control the epidemic area through the administrative division. For infectious diseases, we have abandoned the common administrative management methods. In this paper, a technology of GIS (Geographic Information System) is used to divide the map into several geometric shapes. These 2-dimensional geometric blocks are encoded by GeoHash, they are reduced to 1-dimension and stored as string in any databases. These blocks are the same shape dividing the map, but can be scaled according to the needs of the observation range.
+This kind of lockdown and prevention is divided by the administrative map as figure 2.
+Cities, states or provinces all over the world have different sizes and irregular geographic borders.
+There may be outbreaks in some cities, but it does not mean that it spreads to all corners of the city. On the contrary, there may be no epidemic in the center of neighboring cities, but there may already be a huge risk at the border with the city. In Figure 2, a white block surrounded by red blocks is not secure, even if it is not locked down.
+\begin{figure}[h]
+	\centering
+    \includegraphics[width=\linewidth]{hubei}
+	\caption{Map of locked down administrative divisions of Hubei. [Public domain], via Wikipedia. (\url{https://en.wikipedia.org/wiki/COVID-19_lockdown_in_Hubei}).}
+	\Description{A woman and a girl in white dresses sit in an open car.}
+\end{figure}
+\\
+We summarize the main weaknesses as follows:
+\begin{enumerate}
+    \item The shape of a city is irregular and the spread of virus doesn't follow the administrative division, so the prevention and lockdown can be not accurate.
+    \item The administrative size of a city is fixed, but the disease is spreadable, so the region of lockdown can not be expanded flexibly.
+    \item The information obtained by the residents is asymmetric with that released by the government.
+\end{enumerate}
+Based on above points of view, it is not the best way to observe and control the epidemic area through the administrative division.
+For infectious diseases, we have abandoned the common administrative methods. And we have adopted a technology based on GIS (Geographic Information System)\cite{clarke1986advances}. GeoHash is used to divide the map into several geometric shapes. The 2-dimensional geometric blocks are encoded by GeoHash, they are reduced to 1-dimension and stored as string in any databases. These blocks are presented as regular geometry, but can be scaled according to the needs of different observation scope.
+\\
+The same, we do this technology is because it has the following advantages:
+\begin{enumerate}
+    \item The blocks divided by geohash is regular geometry, and the shape can be customized by observer.
+    \item The blocks are generated dynamically and they are scalable according to the scope of infection.
+    \item By combining with GIS, information about the epidemic situation can be encoded in geohash or directly saved.
+    \item Block data can be quantified, especially safety index.
+    \item When such a GIS is released to the Internet, users get epidemic information in real time.
+\end{enumerate}
 
 \section{Template Overview}
 As noted in the introduction, the ``\verb|acmart|'' document class can
