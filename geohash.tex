@@ -61,11 +61,11 @@
 	Through the computer visualization technology, \textbf{GeoHash} can be easily restored to original digital map.
 	The map is mainly used for epidemic prevention and control, so is named \textbf{"Epidemic Map"}. Each grid on such \textbf{epidemic map} includes the information of regional security and other important characteristics which are concerned by medical work.
 	Dynamic grids on the map can be scaled for monitoring area of different scopes.
-	The information and the results of information analysis on each grid are of great help to epidemic prevention.
-	Such kind of geographic information system, or GeoHash technology can be used not only for controlling COVID-19, but also for other infectious diseases.
+	The vital information and the results of quantitative analysis of the data on each grid are of great help to epidemic prevention in our application experiments.
+	Such kind of geographic information system or GeoHash technology can be used not only for preventing and controlling COVID-19 pandemic, but also for other infectious diseases.
 \end{abstract}
 
-\keywords{GeoHash, COVID-19, big data, ASI, epidemic prevention and control, visual analysis, infectious  disease}
+\keywords{GeoHash, COVID-19, big data, ASI, epidemic prevention and control, visual analysis, infectious disease}
 
 \begin{teaserfigure}
 	\centering\includegraphics[height=50mm]{logo}
@@ -88,10 +88,10 @@ The national medical team carried out centralized medical observation and treatm
 And such quarantine makes positive effects on preventing the spread of coronavirus.
 Research shows, COVID-19 spread became weaker following lockdown\cite{lau2020positive}.
 However the lockdown of a city can cause huge economic losses.
-The lockdown of Some vital areas can cause irreparable losses, such as financial center, political center, industrial dependent cities.
-This kind of lockdown and prevention is divided by the administrative map as figure 2.
+The lockdown of Some vital areas can cause irreparable losses, such as financial center, political center, and industrial dependent cities.
+The current lockdown and prevention method is based on the administrative division as figure 2.
 Cities, states or provinces all over the world have different sizes and irregular geographic borders.
-There may be outbreaks in some cities, but it does not mean that it spreads to all corners of the city. On the contrary, there may be no epidemic in the center of neighboring cities, but there may already be a huge risk at the border with the city. In Figure 2, a white block surrounded by red blocks is not secure, even if it is not locked down.
+There may be an outbreak in a city, but it does not mean that it spreads to all corners of the city. On the contrary, there may be no epidemic in the center of neighboring cities, but there may already be a huge risk at the border with these surrounding cities. Figure 2 is a map that shows the initial locked down cities in Wuhan province, a white block surrounded by red blocks is not secure, even if it is not locked down.
 \begin{figure}[h]
 	\centering
     \includegraphics[width=\linewidth]{hubei}
@@ -101,14 +101,14 @@ There may be outbreaks in some cities, but it does not mean that it spreads to a
 \\
 We summarize the main weaknesses as follows:
 \begin{enumerate}
-    \item The shape of a city is irregular and the spread of virus doesn't follow the administrative division, so the prevention and lockdown can be not accurate.
+    \item The border of a city is irregular and the transmission of virus doesn't follow the administrative division, so the prevention and lockdown can be not accurate.
     \item The administrative size of a city is fixed, but the disease is spreadable, so the region of lockdown can not be expanded flexibly.
     \item The information obtained by the residents is asymmetric with that released by the government.
 \end{enumerate}
 Based on above points of view, it is not the best way to observe and control the epidemic area through the administrative division.
-For infectious diseases, we have abandoned the common administrative methods. And we have adopted a technology based on GIS (Geographic Information System)\cite{clarke1986advances}. GeoHash is used to divide the map into several geometric shapes. The 2-dimensional geometric blocks are encoded by GeoHash, they are reduced to 1-dimension and stored as string in any databases. These blocks are presented as regular geometry, but can be scaled according to the needs of different observation scope.
+For infectious diseases, we have abandoned the common administrative methods. And we have adopted a technology based on GIS (Geographic Information System)\cite{clarke1986advances}. \textbf{GeoHash} is used to divide the map into several geometric blocks. The 2-dimensional geometric blocks on the map are encoded by GeoHash, they are reduced to 1-dimension and stored as string in any databases. These blocks are presented as regular geometry, but can be scaled according to the needs of different observation scope.
 \\
-The same, we do this technology is because it has the following advantages:
+Meanwhile, we do this technology is because it has the following advantages when controlling epidemic situation:
 \begin{enumerate}
     \item The blocks divided by geohash is regular geometry, and the shape can be customized by observer.
     \item The blocks are generated dynamically and they are scalable according to the scope of infection.
@@ -116,8 +116,11 @@ The same, we do this technology is because it has the following advantages:
     \item Block data can be quantified, especially safety index.
     \item When such a GIS is released to the Internet, users get epidemic information in real time.
 \end{enumerate}
+In the practical and experimental scenarios, we developed such a particular GIS for medical prevention and treatment with mobile terminal application and web technology. It can help the medical workers as a visual auxiliary tool.
+\\
+We will introduce some other related work in preventing epidemic by using modern information technologies. Then we focus on how we use \textbf{GeoHash} to divide dynamic blocks, and make quantitative analysis of safety level. Finally we will give our experimental and test data, and summarize the conclusion.
 
-\section{Template Overview}
+\section{Related Work}
 As noted in the introduction, the ``\verb|acmart|'' document class can
 be used to prepare many different kinds of documentation --- a
 double-blind initial submission of a full-length technical paper, a

@@ -6,10 +6,10 @@ build:
     stage: build
     image: mormahr/latex-full
     script:
-        - pdflatex geohash.tex
-        - bibtex geohash
-        - pdflatex geohash.tex
-        - pdflatex geohash.tex
+        - pdflatex ./geohash.tex
+        - bibtex ./geohash
+        - pdflatex ./geohash.tex
+        - pdflatex ./geohash.tex
 
 deploy:
     stage: deploy
