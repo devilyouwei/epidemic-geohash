@@ -10,6 +10,10 @@ build:
         - bibtex ./geohash
         - pdflatex ./geohash.tex
         - pdflatex ./geohash.tex
+    artifacts:
+        expire_in: 1 day
+        paths:
+            - ./geohash.pdf
 
 deploy:
     stage: deploy
