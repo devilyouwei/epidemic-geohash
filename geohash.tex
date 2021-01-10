@@ -117,14 +117,23 @@ Meanwhile, we do this technology is because it has the following advantages when
     \item Block data can be quantified, especially safety index.
     \item When such a GIS is released to the Internet, users get epidemic information in real time.
 \end{enumerate}
-In the practical and experimental scenarios, we use mobile application and web technology to develop such a particular GIS for medical prevention and treatment as Figure 3. It can work for medical workers as a visual auxiliary tool. The \textbf{ASI} in Figure 3 is a value of "Area Safety Index". \textbf{ASI} visualizes the risks in a region, and the algorithm of \textbf{ASI} is described in the following sections. The system contributes to enlighten and support decisions of governments, medical institutions, users, and other researchers who are doing the similar things with us.
+In the practical and experimental scenarios, we use mobile application and web technology to develop such a particular GIS for medical prevention and treatment as Figure 3. It works for medical workers as a visual auxiliary tool and share the results of epidemic data analysis. The \textbf{ASI} in Figure 3 is a value of "Area Safety Index". \textbf{ASI} represents the risk level of a region. The system contributes to enlighten and support decisions of governments, medical institutions, users, and other researchers who are doing the similar research with us.
 \\
-We will also introduce some other related work in preventing epidemic by using similar modern information technology.
-Then we focus on how we use \textbf{GeoHash} to divide dynamic blocks, and make quantitative analysis of each block's safety index.
+The core idea of this technology is dividing dynamic blocks. A block has the following characteristics:
+\begin{enumerate}
+    \item Blocks are regular geometry connected with each other. It can be understood as cellular grids.
+    \item Blocks can be scaled on the map.
+    \item Blocks are created only when they are meaningful.
+    \item Scaling is limited, with the smallest and largest block size.
+    \item Blocks scaling levels are discrete sizes, not continuous.
+    \item A block stores structured data, which can be used for computing and analysing various attributes.
+\end{enumerate}
+The last item in the above list means that the purpose of dividing by blocks is to quantify the characteristics. These quantified eigenvalues are the key indicators and references for epidemic prevention and control.
+\\
+We will also introduce some other related work in preventing epidemic by using similar modern information and visualization technology.
+Then we focus on how we use \textbf{GeoHash} to divide dynamic blocks, and explain the process of quantifing various block values from perspective of algorithm combined with engineering.
 Finally we will give our experimental and test data, and summarize the conclusion.
-\newpage
-\twocolumn
-\begin{figure}[hp]
+\begin{figure*}[hp]
     \centering
     \subfigure[smaller scale]{
         \includegraphics[width=\textwidth]{geogrids1.png}
@@ -133,9 +142,7 @@ Finally we will give our experimental and test data, and summarize the conclusio
         \includegraphics[width=\textwidth]{geogrids2.png}
     }
     \caption{Dynamic blocks with ASI in GIS}
-\end{figure}
-\twocolumn
-\newpage
+\end{figure*}
 \section{Related Work}
 There are some mature cases of controlling and treating COVID-19 pandemic by using information technology and Internet data.
 Many studies on COVID-19 have recently emerged, and various data science applications combating the pandemic have been reported recently\cite{latif2020leveraging}.
