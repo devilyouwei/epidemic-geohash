@@ -9,23 +9,18 @@
 \AtBeginDocument{%
   \providecommand\BibTeX{{%
     \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
-
 \setcopyright{acmcopyright}
 \copyrightyear{2018}
 \acmYear{2018}
 \acmDOI{10.1145/1122445.1122456}
-
 \acmConference[Woodstock '18]{Woodstock '18: ACM Symposium on Neural
   Gaze Detection}{June 03--05, 2018}{Woodstock, NY}
 \acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
   June 03--05, 2018, Woodstock, NY}
 \acmPrice{15.00}
 \acmISBN{978-1-4503-XXXX-X/18/06}
-
 \begin{document}
-
 \title{Epidemics Prevention and Control Based On GeoHash}
-
 \author{Youwei Huang}
 \email{huangyw@iict.ac.cn}
 \affiliation{%
@@ -35,14 +30,12 @@
 	\country{China}
 	\postcode{215000}
 }
-
 \author{Feng Lu}
 \email{lufeng20g@ict.ac.cn}
 \affiliation{%
 	\institution{Institute of Computing Technology, Chinese Academy of Sciences}
 	\city{Beijing}
 	\country{China}}
-
 %% Abstract
 \begin{abstract}
 	COVID-19 (Coronavirus Disease 2019) which is a contagious disease caused by SARS-CoV-2\cite{hu2020characteristics} was first detected in Dec. 2019.
@@ -52,26 +45,23 @@
 	\textbf{GeoHash} is a public domain geocode system invented in 2008 by Gustavo Niemeyer\cite{niemeyer2008geohash}.
 	We divide a map into several grids and use \textbf{GeoHash} to encode the information of each grid.
 	Through the computer visualization technology, \textbf{GeoHash} can be easily restored to original digital map.
-	The map is mainly used for epidemic prevention and control, so is named \textbf{"Epidemic Map"}. Each grid on such \textbf{epidemic map} includes the information of regional security and other important characteristics which are concerned by medical work.
+	The map is mainly used for epidemic prevention and control, so is named \textbf{``epidemic Map''}.
+	Each grid on such \textbf{epidemic map} includes the information of regional safety and other important characteristics which are concerned by medical work.
 	Dynamic grids on the map can be scaled for monitoring area of different scopes.
-	The vital information and the results of quantitative analysis of the data on each grid are of great help to epidemic prevention in our application experiments.
+	The vital information and the results of quantitative analysis of the data on each grid support for decision-making, measures formulation, and effectiveness assessment of COVID-19 prevention and control.
 	Such a kind of geographic information system can be used not only for preventing and controlling COVID-19 pandemic, but also be applicative in instances of other epidemic diseases.
 \end{abstract}
-
-\keywords{GeoHash, COVID-19, big data, ASI, epidemic prevention and control, visual analysis, infectious disease}
-
+\keywords{GeoHash, COVID-19, GIS, big data, epidemic prevention and control}
 \begin{teaserfigure}
 	\centering\includegraphics[height=50mm]{logo.png}
 	\caption{GeoHash technology for geographic grid division}
 	\Description{In 2008, Gustavo Niemeyer invented GeoHash which encoded a geographic location into a short string}
 	\label{fig:teaser}
 \end{teaserfigure}
-
 %%
 %% This command processes the author and affiliation and title
 %% information and builds the first part of the formatted document.
 \maketitle
-
 \section{Introduction}
 During the COVID-19 pandemic, many cities over the world were forced to lock down.
 Wuhan City and the major cities in Hubei, China were put under lockdown on the 23rd and 24th of January, respectively\cite{lau2020positive}.
@@ -85,60 +75,60 @@ The lockdown of Some vital areas can cause irreparable losses, such as financial
 The current lockdown and prevention method is based on the administrative division as figure 2.
 Cities, states or provinces all over the world have different sizes and irregular geographic borders.
 There may be an outbreak in a city, but it does not mean that it spreads to all corners of the city. On the contrary, there may be no epidemic in the center of neighboring cities, but there may already be a huge risk at the border with these surrounding cities. Figure 2 is a map that shows the initial locked down cities in Wuhan province, a white block surrounded by red blocks is not secure, even if it is not locked down.
-\begin{figure}[h]
+\begin{figure}[htb]
 	\centering
-    \includegraphics[width=\linewidth]{hubei.png}
+	\includegraphics[width=\linewidth]{hubei.png}
 	\caption{Map of locked down administrative divisions of Hubei. [Public domain], via Wikipedia. (\url{https://en.wikipedia.org/wiki/COVID-19_lockdown_in_Hubei}).}
 	\Description{Locked down cities in Hubei province, white blocks are unlocked and red blocks are locked}
 \end{figure}
 \\
 We summarize the main weaknesses as follows:
 \begin{enumerate}
-    \item The border of a city is irregular and the transmission of virus doesn't follow the administrative division, so the prevention and lockdown can be not accurate.
-    \item The administrative size of a city is fixed, but the disease is spreadable, so the region of lockdown can not be expanded flexibly.
-    \item The information obtained by the residents is asymmetric with that released by the government.
+	\item The border of a city is irregular and the transmission of virus doesn't follow the administrative division, so the prevention and lockdown can be not accurate.
+	\item The administrative size of a city is fixed, but the disease is spreadable, so the region of lockdown can not be expanded flexibly.
+	\item The information obtained by the residents is asymmetric with that released by the government.
 \end{enumerate}
 Based on above points of view, it is not the best way to observe and control the epidemic area through the administrative division.
 For infectious diseases, we have abandoned the common administrative methods. And we have adopted a technology based on GIS (Geographic Information System)\cite{clarke1986advances}. \textbf{GeoHash} is used to divide the map into several geometric blocks. The 2-dimensional geometric blocks on the map are encoded by GeoHash, they are reduced to 1-dimension and stored as string in any databases. These blocks are presented as regular geometry, but can be scaled according to the needs of different observation scope.
 \\
 Meanwhile, we do this technology is because it has the following advantages when controlling epidemic situation:
 \begin{enumerate}
-    \item The blocks divided by geohash is regular geometry, and the shape can be customized by observer.
-    \item The blocks are generated dynamically and they are scalable according to the scope of infection.
-    \item By combining with GIS, information about the epidemic situation can be encoded in geohash or directly saved.
-    \item Block data can be quantified, especially safety index.
-    \item When such a GIS is released to the Internet, users get epidemic information in real time.
+	\item The blocks divided by geohash is regular geometry, and the shape can be customized by observer.
+	\item The blocks are generated dynamically and they are scalable according to the scope of infection.
+	\item By combining with GIS, information about the epidemic situation can be encoded in geohash or directly saved.
+	\item Block data can be quantified, especially when generating safety index.
+	\item When such a GIS is released to the Internet, users get epidemic information in real time.
 \end{enumerate}
-In the practical and experimental scenarios, we use mobile application and web technology to develop such a particular GIS for medical prevention and treatment as Figure 3. It works for medical workers as a visual auxiliary tool and share the results of epidemic data analysis. The \textbf{ASI} in Figure 3 is a value of "Area Safety Index". \textbf{ASI} represents the risk level of a region. The system contributes to enlighten and support decisions of governments, medical institutions, users, and other researchers who are doing the similar research with us.
+In the practical and experimental scenarios, we use mobile application and web technology to develop such a particular GIS for medical prevention and treatment as Figure 3. It works for medical workers as a visual auxiliary tool and share the results of epidemic data analysis. The \textbf{ASI} in Figure 3 is a value of ``Area Safety Index''. \textbf{ASI} represents the risk level of a region. The system contributes to enlighten and support decisions of governments, medical institutions, users, and other researchers who are doing the similar research with us.
 \\
 The core idea of this technology is dividing dynamic blocks. A block has the following characteristics:
 \begin{enumerate}
-    \item Blocks are regular geometry connected with each other. It can be understood as cellular grids.
-    \item Blocks can be scaled on the map.
-    \item Blocks are created only when they are meaningful.
-    \item Scaling is limited, with the smallest and largest block size.
-    \item Blocks scaling levels are discrete sizes, not continuous.
-    \item A block stores structured data, which can be used for computing and analysing various attributes.
+	\item Blocks are regular geometry connected with each other. It can be understood as cellular grids.
+	\item Blocks can be scaled on the map.
+	\item Blocks are created only when they are meaningful.
+	\item Scaling is limited, with the smallest and largest block size.
+	\item Blocks scaling levels are discrete sizes, not continuous.
+	\item A block stores structured data, which can be used for computing and analysing various attributes.
 \end{enumerate}
 The last item in the above list means that the purpose of dividing by blocks is to quantify the characteristics. These quantified eigenvalues are the key indicators and references for epidemic prevention and control.
 \\
 We will also introduce some other related work in preventing epidemic by using similar modern information and visualization technology.
 Then we focus on how we use \textbf{GeoHash} to divide dynamic blocks, and explain the process of quantifing various block values from perspective of algorithm combined with engineering.
 Finally we will give our experimental and test data, and summarize the conclusion.
-\begin{figure*}[hp]
-    \centering
-    \subfigure[larger scale]{
-        \includegraphics[width=\textwidth]{geogrids1.png}
-    }
-    \subfigure[smaller scale]{
-        \includegraphics[width=\textwidth]{geogrids2.png}
-    }
-    \caption{Dynamic blocks with ASI in GIS}
+\begin{figure*}[hptb]
+	\centering
+	\subfigure[larger scale]{
+		\includegraphics[width=\textwidth]{geogrids1.png}
+	}
+	\subfigure[smaller scale]{
+		\includegraphics[width=\textwidth]{geogrids2.png}
+	}
+	\caption{Dynamic blocks with ASI in geographic information system}
 \end{figure*}
 \section{Related Work}
 There are some mature cases of controlling and treating COVID-19 pandemic by using information technology and Internet data.
 Many studies on COVID-19 have recently emerged, and various data science applications combating the pandemic have been reported recently\cite{latif2020leveraging}.
-The main effects of these systems or applications are listed as follows:\cite{jia2020big}
+The main functions of these systems or softwares are listed as follows:\cite{jia2020big}
 \begin{itemize}
 	\item Tracking of people's movements.
 	\item Early warning of high-risk areas.
@@ -146,72 +136,109 @@ The main effects of these systems or applications are listed as follows:\cite{ji
 	\item Drug development.
 	\item Information release and policy support.
 \end{itemize}
-
-\subsection{Data Visualization}
-This is one of the most basic ways to present the epidemic situation by using computer visualization technology.
-It presents data to users by drawing charts and graphics, in which the data is represented by symbols, such as bar charts, line charts, pie charts, maps and etc\cite{jensen1992harvard}.
+\subsection{Data Visualization Analysis}
+The computer can visualize all kinds of structured data and convey the information to users.
+Visualization technology presents data to users by drawing charts and graphics, in which the data is represented by symbols, such as bar charts, line charts, pie charts, maps and etc\cite{jensen1992harvard}.
 \\
-Figure 4 shows the global COVID-19 epidemic situation in the form of map charts. Epidemic maps are updated by WHO (World Health Orgnaization)\footnote{https://www.who.int} in real time, to display the number of cases around the world.
-Maps in Figure 4 uses two styles of presentation: choropleth and bubble.
-One uses the shade of color to show the severity of the epidemic situation in each country, and another uses the bubble size to show the number of infections.
-No matter what kind of map, its role is to help the local people and government understand the severity of the epidemic, and help the government to take actions to treat the epidemic situation.
-These two figures (Figure 4) are similar to the previous Figure 2, except that Figure 2 only shows the data of one province in China.
-The contents in these maps include: confirmed cases, deaths, historical cases, added cases, and regional lockdown status.
-\\
-Some disadvantages of such maps are discussed in section 1: \textbf{Introduction}.
-\begin{figure}[h]
-    \centering
-    \subfigure[Choropleth Map]{
-        \includegraphics[width=\linewidth]{worldmap1.png}
-    }
-    \subfigure[Bubble Map]{
-        \includegraphics[width=\linewidth]{worldmap2.png}
-    }
-    \caption{WHO coronavirus disease dashboard. [Public domain], via WHO. (\url{https://covid19.who.int/}).}
-    \Description{The figures are captured from the official website of WHO, the web page uses a dashboard to show the COVID-19 situation over the world.}
+Figure 4 shows the global COVID-19 epidemic situation in the form of map charts. The epidemic maps are updated by WHO (World Health Organization)\footnote{https://www.who.int} in real time, to display the number of cases around the world.
+\begin{figure}[htb]
+	\centering
+	\subfigure[Choropleth Map]{
+		\includegraphics[width=\linewidth]{worldmap1.png}
+	}
+	\subfigure[Bubble Map]{
+		\includegraphics[width=\linewidth]{worldmap2.png}
+	}
+	\caption{WHO coronavirus disease dashboard. [Public domain], via WHO (\url{https://covid19.who.int})}
+	\Description{The figures are captured from the official website of WHO, the web page uses a dashboard to show the COVID-19 situation over the world.}
 \end{figure}
-
-\subsection{Template Parameters}
+\\
+Maps in Figure 4 uses two styles of presentation: choropleth and bubble.
+One uses the depth of color to show the severity of the epidemic situation in each country, and another uses the bubble size to show the number of infections.
+No matter what kind of map, its role is to help the local people easy to understand the severity of the epidemic, and prompt the local government to take actions to treat and control the epidemic situation.
+These two figures (Figure 4) are similar to the previous Figure 2, except that Figure 2 only shows the data of one province.
+Contents in these maps include like: confirmed cases, deaths, historical cases, added cases, and regional lockdown status.
+Some disadvantages of such kind of maps are discussed in section 1: \textbf{Introduction}.
+\\
+The bar charts and line charts are aslo widely used in epidemic data analysis.
+These graphs are mostly used to show the trend of epidemic situation and transmission cycle.
+Figure 5 is an example that uses both bar chart and line chart to perform the trend of daily new cases from Jan. 2020 to Jan. 2021 in the US. The red line in this chart is the 7-day moving average curve.
+We can also view other trends of different types of data, such as death trends, through the CDC\footnote{https://covid.cdc.gov/covid-data-tracker} official website.
+\begin{figure}[htb]
+	\centering\includegraphics[width=\linewidth]{linebar-us-1-15.png}
+	\caption{Daily trends in number of COVID-19 new cases in the US reported to CDC. [Public domain], via CDC (\url{https://covid.cdc.gov/covid-data-tracker/\#trends_dailytrendscases})}
+	\Description{The figure is a screenshot from CDC official web page, it shows the daily new cases in the US by drawing a bar and line chart.}
+\end{figure}
+\\
+The line charts and bar charts reflect historical epidemic data from time series, while map charts reflect epidemic data from spatial distribution.
+In other related work survey, visual data analysis are used to study the relationship between population mobility and the epidemic spreading pattern.
+During the early outbreak of coronavirus in Wuhan, China, the graphs in a research gave a conclusion that the number of confirmed cases in other provinces were directly proportional to the inflow of Wuhan population.
+The research group also used the pattern derived from the data analysis to predict the number of infections.\cite{chen2020data}
+\subsection{Geographic Information System}
+The maps we described in the previous section are charts, the information carried by map charts is limited, unflexible and not real-time.
+Although charts can provide visual perception, users need to analyze the graphs by themselves, but GIS can integrate analysis and prediction functions.
+A GIS (geographic information system) is a conceptualized framework that provides the ability to capture and analyze spatial and geographic data\cite{clarke1986advances}.
+Since the outbreak of the epidemic, a number of geographic information systems have been built or have added real-time epidemic related functions, such as ``epidemic map displays'', ``fever clinic queries'' and ``passenger information queries''.
+Based on existing commercial GIS softwares, they made important contributions to epidemic prevention and control\cite{zhou2020covid}.
+Some of the systems have the function of dynamic zoom map, which can display the situations of different scaling areas, from state level to community level.
+For example, Figure 6 shows a map with an epidemic layer on it, it is a GIS tool that shows critical information about COVID-19 cases in an area so the users can make more informed decisions about where to go.
+\begin{figure}[htb]
+	\centering
+	\subfigure[State Level]{
+		\includegraphics[width=0.45\linewidth,height=80mm]{state-level.png}
+	}
+	\subfigure[County Level]{
+		\includegraphics[width=0.45\linewidth,height=80mm]{county-level.png}
+	}
+	\caption{COVID layer in Google Map of different scales}
+\end{figure}
+\\
+In Figure 6, \textbf{Google Map} adds a COVID-19 layer to the GIS, it also quantities an safety index by using the 7-day average for the number of new cases per 100,000 people.
+It also indicates whether cases are increasing or decreasing.
+The layer’s colors indicate:\footnote{https://support.google.com/maps/answer/9795160}
+\begin{itemize}
+    \item Grey: Less than 1 case
+    \item Yellow: 1-10 cases
+    \item Orange: 10-20 cases
+    \item Dark orange: 20-30 cases
+    \item Red: 30-40 cases
+    \item Dark red: 40+ cases
+\end{itemize}
+\\
+Unlike \textbf{Google Map}, we perform the quantitative analysis based on dynamic GeoHash blocks instead of administrative regions.
+The safety quantification algorithm we use not only includes the simple infected cases.
+In the following chapters, I will focus on our research work about how to use GeoHash to improve the GIS in epidemic prevention and control.
 
 \section{Modifications}
 Modifying the template --- including but not limited to: adjusting
 margins, typeface sizes, line spacing, paragraph and list definitions,
 and the use of the \verb|\vspace| command to manually adjust the
 vertical spacing between elements of your work --- is not allowed.
-
 	{\bfseries Your document will be returned to you for revision if
 		modifications are discovered.}
-
 \section{Typefaces}
-
 The ``\verb|acmart|'' document class requires the use of the
 ``Libertine'' typeface family. Your \TeX\ installation should include
 this set of packages. Please do not substitute other typefaces. The
 ``\verb|lmodern|'' and ``\verb|ltimes|'' packages should not be used,
 as they will override the built-in typeface families.
-
 \section{Title Information}
-
 The title of your work should use capital letters appropriately -
 \url{https://capitalizemytitle.com/} has useful rules for
 capitalization. Use the {\verb|title|} command to define the title of
 your work. If your work has a subtitle, define it with the
 	{\verb|subtitle|} command.  Do not insert line breaks in your title.
-
 If your title is lengthy, you must define a short version to be used
 in the page headers, to prevent overlapping text. The \verb|title|
 command has a ``short title'' parameter:
 \begin{verbatim}
   \title[short title]{full title}
 \end{verbatim}
-
 \section{Authors and Affiliations}
-
 Each author must be defined separately for accurate metadata
 identification. Multiple authors may share one affiliation. Authors'
 names should not be abbreviated; use full first names wherever
 possible. Include authors' e-mail addresses whenever possible.
-
 Grouping authors' names or e-mail addresses, or providing an ``e-mail
 alias,'' as shown below, is not acceptable:
 \begin{verbatim}
@@ -219,11 +246,9 @@ alias,'' as shown below, is not acceptable:
   \email{dave,judy,steve@university.edu}
   \email{firstname.lastname@phillips.org}
 \end{verbatim}
-
 The \verb|authornote| and \verb|authornotemark| commands allow a note
 to apply to multiple authors --- for example, if the first two authors
 of an article contributed equally to the work.
-
 If your author list is lengthy, you must define a shortened version of
 the list of authors to be used in the page headers, to prevent
 overlapping text. The following command should be placed just after
@@ -234,21 +259,16 @@ the last \verb|\author{}| definition:
 Omitting this command will force the use of a concatenated list of all
 of the authors' names, which may result in overlapping text in the
 page headers.
-
 The article template's documentation, available at
 \url{https://www.acm.org/publications/proceedings-template}, has a
 complete explanation of these commands and tips for their effective
 use.
-
 Note that authors' addresses are mandatory for journal articles.
-
 \section{Rights Information}
-
 Authors of any work published by ACM will need to complete a rights
 form. Depending on the kind of work, and the rights management choice
 made by the author, this may be copyright transfer, permission,
 license, or an OA (open access) agreement.
-
 Regardless of the rights management choice, the author will receive a
 copy of the completed rights form once it has been submitted. This
 form contains \LaTeX\ commands that must be copied into the source
@@ -260,53 +280,39 @@ document:
 	\item the ``rights management'' text on the first page.
 	\item the conference information in the page header(s).
 \end{itemize}
-
 Rights information is unique to the work; if you are preparing several
 works for an event, make sure to use the correct set of commands with
 each of the works.
-
 The ACM Reference Format text is required for all articles over one
 page in length, and is optional for one-page articles (abstracts).
-
 \section{CCS Concepts and User-Defined Keywords}
-
 Two elements of the ``acmart'' document class provide powerful
 taxonomic tools for you to help readers find your work in an online
 search.
-
 The ACM Computing Classification System ---
 \url{https://www.acm.org/publications/class-2012} --- is a set of
 classifiers and concepts that describe the computing
 discipline. Authors can select entries from this classification
 system, via \url{https://dl.acm.org/ccs/ccs.cfm}, and generate the
 commands to be included in the \LaTeX\ source.
-
 User-defined keywords are a comma-separated list of words and phrases
 of the authors' choosing, providing a more flexible way of describing
 the research being presented.
-
 CCS concepts and user-defined keywords are required for for all
 articles over two pages in length, and are optional for one- and
 two-page articles (or abstracts).
-
 \section{Sectioning Commands}
-
 Your work should use standard \LaTeX\ sectioning commands:
 \verb|section|, \verb|subsection|, \verb|subsubsection|, and
 \verb|paragraph|. They should be numbered; do not remove the numbering
 from the commands.
-
 Simulating a sectioning command by setting the first word or words of
 a paragraph in boldface or italicized text is {\bfseries not allowed.}
-
 \section{Tables}
-
 The ``\verb|acmart|'' document class includes the ``\verb|booktabs|''
 package --- \url{https://ctan.org/pkg/booktabs} --- for preparing
 high-quality tables.
-
 Table captions are placed {\itshape above} the table.
-
 Because tables cannot be split across pages, the best placement for
 them is typically the top of the page nearest their initial cite.  To
 ensure this proper ``floating'' placement of tables, use the
@@ -316,12 +322,10 @@ table caption.  The contents of the table itself must go in the
 columns, with the desired horizontal and vertical rules.  Again,
 detailed instructions on \textbf{tabular} material are found in the
 \textit{\LaTeX\ User's Guide}.
-
 Immediately following this sentence is the point at which
 Table~\ref{tab:freq} is included in the input file; compare the
 placement of the table here with the table in the printed output of
 this document.
-
 \begin{table}
 	\caption{Frequency of Special Characters}
 	\label{tab:freq}
@@ -336,7 +340,6 @@ this document.
 		\bottomrule
 	\end{tabular}
 \end{table}
-
 To set a wider table, which takes up the whole width of the page's
 live area, use the environment \textbf{table*} to enclose the table's
 contents and the table caption.  As with a single-column table, this
@@ -345,7 +348,6 @@ desirable. Immediately following this sentence is the point at which
 Table~\ref{tab:commands} is included in the input file; again, it is
 instructive to compare the placement of the table here with the table
 in the printed output of this document.
-
 \begin{table*}
 	\caption{Some Typical Commands}
 	\label{tab:commands}
@@ -359,17 +361,14 @@ in the printed output of this document.
 		\bottomrule
 	\end{tabular}
 \end{table*}
-
 Always use midrule to separate table header rows from data rows, and
 use it only for this purpose. This enables assistive technologies to
 recognise table headers and support their users in navigating tables
 more easily.
-
 \section{Math Equations}
 You may want to display math equations in three distinct styles:
 inline, numbered or non-numbered display.  Each of the three are
 discussed in the next sections.
-
 \subsection{Inline (In-text) Equations}
 A formula that appears in the running text is called an inline or
 in-text formula.  It is produced by the \textbf{math} environment,
@@ -384,13 +383,11 @@ examples of in-text equations in context. Notice how this equation:
 \end{math},
 set here in in-line math style, looks slightly different when
 set in display style.  (See next section).
-
 \subsection{Display Equations}
 A numbered display equation---one set off by vertical space from the
 text and centered horizontally---is produced by the \textbf{equation}
 environment. An unnumbered display equation is produced by the
 \textbf{displaymath} environment.
-
 Again, in either environment, you can use any of the symbols and
 structures available in \LaTeX\@; this section will just give a couple
 of examples of display equations in context.  First, consider the
@@ -409,9 +406,7 @@ and follow it with another numbered equation:
 	\sum_{i=0}^{\infty}x_i=\int_{0}^{\pi+2} f
 \end{equation}
 just to demonstrate \LaTeX's able handling of numbering.
-
 \section{Figures}
-
 The ``\verb|figure|'' environment should be used for figures. One or
 more images can be placed within a figure. If your figure contains
 third-party material, you must clearly identify it as such, as shown
@@ -424,17 +419,13 @@ in the example below.
 		Commons. (\url{https://goo.gl/VLCRBB}).}
 	\Description{A woman and a girl in white dresses sit in an open car.}
 \end{figure}
-
 Your figures should contain a caption which describes the figure to
 the reader.
-
 Figure captions are placed {\itshape below} the figure.
-
 Every figure should also have a figure description unless it is purely
 decorative. These descriptions convey what’s in the image to someone
 who cannot see it. They are also used by search engine crawlers for
 indexing images, and when images cannot be loaded.
-
 A figure description must be unformatted plain text less than 2000
 characters long (including spaces).  {\bfseries Figure descriptions
 		should not repeat the figure caption – their purpose is to capture
@@ -448,9 +439,7 @@ structured list representing a graph.  For additional information
 regarding how best to write figure descriptions and why doing this is
 so important, please see
 \url{https://www.acm.org/publications/taps/describing-figures/}.
-
 \subsection{The ``Teaser Figure''}
-
 A ``teaser figure'' is an image, or set of images in one figure, that
 are placed after all author and affiliation information, and before
 the body of the article, spanning the page. If you wish to have such a
@@ -463,16 +452,13 @@ figure in your article, place the command immediately before the
     \Description{figure description}
   \end{teaserfigure}
 \end{verbatim}
-
 \section{Citations and Bibliographies}
-
 The use of \BibTeX\ for the preparation and formatting of one's
 references is strongly recommended. Authors' names should be complete
 --- use full first names (``Donald E. Knuth'') not initials
 (``D. E. Knuth'') --- and the salient identifying features of a
 reference should be included: title, year, volume, number, pages,
 article DOI, etc.
-
 The bibliography is included in your source document with these two
 commands, placed just before the \verb|\end{document}| command:
 \begin{verbatim}
@@ -481,7 +467,6 @@ commands, placed just before the \verb|\end{document}| command:
 \end{verbatim}
 where ``\verb|bibfile|'' is the name, without the ``\verb|.bib|''
 suffix, of the \BibTeX\ file.
-
 Citations and references are numbered by default. A small number of
 ACM publications have citations and references formatted in the
 ``author year'' style; for these exceptions, please include this
@@ -490,7 +475,6 @@ command in the {\bfseries preamble} (before the command
 \begin{verbatim}
   \citestyle{acmauthoryear}
 \end{verbatim}
-
 Some examples.  A paginated journal article \cite{Abril07}, an
 enumerated journal article \cite{Cohen07}, a reference to an entire
 issue \cite{JCohen96}, a monograph (whole book) \cite{Kosiur01}, a
@@ -521,15 +505,12 @@ couple of citations with DOIs:
 \cite{2004:ITE:1009386.1010128,Kirschmer:2010:AEI:1958016.1958018}. Online
 citations: \cite{TUGInstmem, Thornburg01, CTANacmart}. Artifacts:
 \cite{R} and \cite{UMassCitations}.
-
 \section{Acknowledgments}
-
 Identification of funding sources and other support, and thanks to
 individuals and groups that assisted in the research and the
 preparation of the work should be included in an acknowledgment
 section, which is placed just before the reference section in your
 document.
-
 This section has a special environment:
 \begin{verbatim}
   \begin{acks}
@@ -539,15 +520,11 @@ This section has a special environment:
 so that the information contained therein can be more easily collected
 during the article metadata extraction phase, and to ensure
 consistency in the spelling of the section heading.
-
 Authors should not prepare this section as a numbered or unnumbered {\verb|\section|}; please use the ``{\verb|acks|}'' environment.
-
 \section{Appendices}
-
 If your work needs an appendix, add it before the
 ``\verb|\end{document}|'' command at the conclusion of your source
 document.
-
 Start the appendix with the ``\verb|appendix|'' command:
 \begin{verbatim}
   \appendix
@@ -555,9 +532,7 @@ Start the appendix with the ``\verb|appendix|'' command:
 and note that in the appendix, sections are lettered, not
 numbered. This document has two appendices, demonstrating the section
 and subsection identification method.
-
 \section{SIGCHI Extended Abstracts}
-
 The ``\verb|sigchi-a|'' template style (available only in \LaTeX\ and
 not in Word) produces a landscape-orientation formatted article, with
 a wide left margin. Three environments are available for use with the
@@ -568,7 +543,6 @@ the margin:
 	\item {\verb|marginfigure|}: Place a figure in the margin.
 	\item {\verb|margintable|}: Place a table in the margin.
 \end{itemize}
-
 %%
 %% The acknowledgments section is defined using the "acks" environment
 %% (and NOT an unnumbered section). This ensures the proper
@@ -577,46 +551,35 @@ the margin:
 \begin{acks}
 	To Robert, for the bagels and explaining CMYK and color spaces.
 \end{acks}
-
 %%
 %% The next two lines define the bibliography style to be used, and
 %% the bibliography file.
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{refs}
-
 %%
 %% If your work has an appendix, this is the place to put it.
 \appendix
-
 \section{Research Methods}
-
 \subsection{Part One}
-
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
 malesuada, quam in pulvinar varius, metus nunc fermentum urna, id
 sollicitudin purus odio sit amet enim. Aliquam ullamcorper eu ipsum
 vel mollis. Curabitur quis dictum nisl. Phasellus vel semper risus, et
 lacinia dolor. Integer ultricies commodo sem nec semper.
-
 \subsection{Part Two}
-
 Etiam commodo feugiat nisl pulvinar pellentesque. Etiam auctor sodales
 ligula, non varius nibh pulvinar semper. Suspendisse nec lectus non
 ipsum convallis congue hendrerit vitae sapien. Donec at laoreet
 eros. Vivamus non purus placerat, scelerisque diam eu, cursus
 ante. Etiam aliquam tortor auctor efficitur mattis.
-
 \section{Online Resources}
-
 Nam id fermentum dui. Suspendisse sagittis tortor a nulla mollis, in
 pulvinar ex pretium. Sed interdum orci quis metus euismod, et sagittis
 enim maximus. Vestibulum gravida massa ut felis suscipit
 congue. Quisque mattis elit a risus ultrices commodo venenatis eget
 dui. Etiam sagittis eleifend elementum.
-
 Nam interdum magna at lectus dignissim, ac dignissim lorem
 rhoncus. Maecenas eu arcu ac neque placerat aliquam. Nunc pulvinar
 massa et mattis lacinia.
-
 \end{document}
 \endinput
