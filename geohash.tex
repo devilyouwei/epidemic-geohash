@@ -6,6 +6,7 @@
 %% IICT, CAS
 \documentclass[sigplan,screen]{acmart}
 \usepackage{subfigure}
+\def\degree{${}^{\circ}$}
 \AtBeginDocument{%
   \providecommand\BibTeX{{%
     \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
@@ -199,7 +200,7 @@ For example, Figure 6 shows a map with an epidemic layer on it, it is a GIS tool
 \\
 In Figure 6, \textbf{Google Map} adds a COVID-19 layer to the GIS, it also quantities an safety index by using the 7-day average for the number of new cases per 100,000 people.
 It also indicates whether cases are increasing or decreasing.
-The layer’s colors indicate:\footnote{https://support.google.com/maps/answer/9795160}
+The layer's colors indicate:\footnote{https://support.google.com/maps/answer/9795160}
 \begin{itemize}
 	\item Grey: Less than 1 case
 	\item Yellow: 1-10 cases
@@ -226,7 +227,7 @@ This means that the medical workers knows their patients' true identity, but eve
 \\
 To the data quantification, we need to divide the map to blocks first by using GeoHash.
 At the step of GPS data collection, we get the longitude and latitude values from users, and we can use GeoHash to calculate which block the user belongs to.
-Suppose a GeoHash block as a set \(B_1\) that includes many users, we quantify the safety of \(B_1\) based on confirmed cases and the total number of users in \(B_1\).
+Suppose a GeoHash block as a set $B_1$ that includes many users, we quantify the safety of $B_1$ based on confirmed cases and the total number of users in $B_1$.
 This is not enough, the historical ``visitors'' of this block also need to be considered too.
 These visitors who are diagnosed in the short term will have negative effects on the block.
 As we have discussed above (in Section 2.1), a research has proposed that the number of people infected in a region is positively correlated with the inflow of the population from high-risk areas.
@@ -236,7 +237,40 @@ The general storage and calculation process is shown in Figure 7, and the detail
 	\centering\includegraphics[width=\linewidth]{process.pdf}
 	\caption{The process of data collection and quantification}
 \end{figure}
-\section{Algorithms and Methods}
+\section{Implementation methods}
+In Section: Pre-Work, we have obtained the user's position information through the mobile terminal.
+The information contains some necessary data: userid, longitude and latitude.
+Based on the information, we can divide users into different blocks.
+\subsection{Divide The Earth}
+Our first step is to divide the earth into blocks or grids. GeoHash technology can help us achieve this step.
+GeoHash can perform the following operations:
+\begin{itemize}
+	\item GeoHash divides a two-dimensional map into buckets of grid according to the range of longitude and latitude.
+	\item GeoHash encodes a geographic location (longitude and latitude) into a string of binary codes.
+	\item Through the incremental operation of encoded binary code, these grids are chained to a Z-order curve as Figure 8.
+\end{itemize}
+How does Geohash achieve the above operations?
+We know that the geographical division of longitude is from -180 to 180 degrees and latitude is from -90 to 90 degrees\cite{crossley1999guide}.
+We can divide the longitude into two intervals: $[-180$\degree$, 0$\degree$]$, $[0$\degree$, 180$\degree$]$.
+We denote the two intervals by binary number ``0'' and ``1'' respectively.
+The same logic, we divide the latitude into two intervals: $[-90$\degree$, 0$\degree$]$, $[0$\degree$, 90$\degree$]$ and denote them by ``0'' and ``1''.
+Then we can use ``00'', ``01'', ``10'', ``11'' to represent the four grids.
+Refer to Figure 8, the first figure, this has implemented ``Divide the earth into 4 grids''.
+But in this way, the area of each grid is very large, and the precision is too low.
+We can use the same method to further subdivide into 16, 64 grids, etc.
+\begin{figure}[htb]
+	\centering
+	\subfigure[4 Grids]{
+		\includegraphics[width=0.45\linewidth,height=33mm]{4-grids.png}
+	}
+	\subfigure[16 Grids]{
+		\includegraphics[width=0.45\linewidth,height=33mm]{16-grids.png}
+	}
+	\caption{Z-order curve to show GeoHash grids division}
+\end{figure}
+\\
+Meanwhile, we found that these grids can be strung in an z-order curve, which means we can store the two-dimensional map grids in a one-dimensional array.
+Any position on the earth must belong to a grid in this array then any user who submits the GPS data must belong to a grid in our GIS.
 \section{Test}
 \section{Conclusions}
 %%
