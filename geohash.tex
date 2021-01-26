@@ -249,7 +249,7 @@ The general storage and calculation process is shown in Figure 7, and the detail
 In Pre-Work section, user position information is obtained through the mobile terminal.
 The information contains some necessary data: userid, longitude and latitude, and \textbf{USI}\footnote{USI is ``User Safety Index'', a value of user's health in our system}.
 Based on the above data, we can divide users into different blocks.
-\subsection{Divide Grids}
+\subsection{Grid Division}
 Our first step is to divide the earth into blocks or grids. GeoHash technology can help us achieve this step.
 GeoHash can perform the following operations:
 \begin{itemize}
@@ -279,85 +279,93 @@ For higher precision and smaller length, we only need to add the bits of GeoHash
 	}
 	\caption{Z-order curve to show GeoHash grids division}
 \end{figure}
-\\
+\subsection{Gird Size}
 %%In addition, we found that these grids can be strung to an z-order curve, which means we can store the two-dimensional map grids in a one-dimensional array.
 %%Any user shall belong to a grid.
-\\
 The following Table 1 contrasts the geographical length and GeoHash bit length at around 30\degree\ latitude.
 \begin{table}[htb]
-    \caption{Comparison table of GeoHash bit and estimated geographical length of one grid at 30\degree\ latitude}
-    \begin{tabular}{lll}
-        \toprule
-        East-West Length(m) & South-North Length(m) & Bits \\
-        \midrule
-        32.67               & 19.05                 & 20*2          \\
-        65.34               & 38.1                  & 19*2          \\
-        130.68              & 76.2                  & 18*2          \\
-        261.36              & 152.4                 & 17*2          \\
-        522.72              & 304.8                 & 16*2          \\
-        1045.44             & 609.6                 & 15*2          \\
-        2090.88             & 1219.2                & 14*2          \\
-        4181.76             & 2438.4                & 13*2          \\
-        8363.52             & 4876.8                & 12*2          \\
-        16727.04            & 9753.6                & 11*2          \\
-        33454.08            & 19507.2               & 10*2          \\
-        66908.16            & 39014.4               & 9*2           \\
-        133816.32           & 78028.8               & 8*2           \\
-        267632.64           & 156057.6              & 7*2           \\
-        535265.28           & 312115.2              & 6*2           \\
-        1070530.56          & 624230.4              & 5*2           \\
-        2141061.12          & 1248460.8             & 4*2           \\
-        4282122.24          & 2496921.6             & 3*2           \\
-        8564244.48          & 4993843.2             & 2*2           \\
-        17128488.96         & 9987686.4             & 1*2           \\
-        \bottomrule
-    \end{tabular}
+	\caption{Comparison table of GeoHash bit and estimated geographical length of one grid at 30\degree\ latitude}
+	\begin{tabular}{lll}
+		\toprule
+		East-West Length(m) & South-North Length(m) & Bits \\
+		\midrule
+		32.67               & 19.05                 & 20*2 \\
+		65.34               & 38.1                  & 19*2 \\
+		130.68              & 76.2                  & 18*2 \\
+		261.36              & 152.4                 & 17*2 \\
+		522.72              & 304.8                 & 16*2 \\
+		1045.44             & 609.6                 & 15*2 \\
+		2090.88             & 1219.2                & 14*2 \\
+		4181.76             & 2438.4                & 13*2 \\
+		8363.52             & 4876.8                & 12*2 \\
+		16727.04            & 9753.6                & 11*2 \\
+		33454.08            & 19507.2               & 10*2 \\
+		66908.16            & 39014.4               & 9*2  \\
+		133816.32           & 78028.8               & 8*2  \\
+		267632.64           & 156057.6              & 7*2  \\
+		535265.28           & 312115.2              & 6*2  \\
+		1070530.56          & 624230.4              & 5*2  \\
+		2141061.12          & 1248460.8             & 4*2  \\
+		4282122.24          & 2496921.6             & 3*2  \\
+		8564244.48          & 4993843.2             & 2*2  \\
+		17128488.96         & 9987686.4             & 1*2  \\
+		\bottomrule
+	\end{tabular}
 \end{table}
 Since the geometric shape of the earth is a sphere, even with the same GeoHash bit, the grids of high latitude contains less geographical length than those of low latitude.
 Attention: the length data in Table 1 is generated from the grids around 30\degree\ latitude, it doesn't represent all the grids or an average value.
 \\
 Use the following formulas (1) and (2) to estimate the length of the two edges of a grid and it assumes the earth is completely spherical.
-We use $G_{NS}$ to represent the length of north-south edge and $G_{EW}$ to represent the length of east-west edge. The index $geobit$ is the length of GeoHash bit.
+We use $G_{NS}$ to represent the length of north-south edge and $G_{EW}$ to represent the length of east-west edge as they are in Figure 9.
+The index $geobit$ is the length of total GeoHash bits which is used to represent a grid.
 The length of a meridian which is $L_{meridian}$ in Formula (1) has been estimated at 20,003.93 km (12,429.9 miles) on a modern ellipsoid model of the earth (WGS 84)\cite{weintrit2013so}.
 The length of the equator which is $L_{equator}$ in Formula (2) is about 40,075 km (24,901 miles) long\cite{equator2011}.
 Formula (1) is used to estimate the length of the north-south edge of a grid.
 Formula (2) is used to estimate the length of the east-west edge of a grid at latitude $\varphi$.
 \begin{equation}
-    G_{NS}\approx\frac{L_{meridian}}{2^{geobit/2}}
+	G_{NS}\approx\frac{L_{meridian}}{2^{geobit/2}}
 \end{equation}
 \begin{equation}
-    G_{EW}(\varphi)\approx\frac{L_{equator}\times\cos(\varphi)}{2^{geobit/2}}
+	G_{EW}(\varphi)\approx\frac{L_{equator}\times\cos(\varphi)}{2^{geobit/2}}
 \end{equation}
 \\
 The reason why the word ``estimate'' is used when caculating $G_{NS}$ and $G_{EW}$ is that the earth is actually elliptical.
 earth ellipsoid will cause the following two issues:
 \begin{itemize}
-    \item The meridian and equator are different in length, grids at different latitudes own different $G_{NS}$ values.
-    \item If the precision of the grid is not high enough, the grid is not a rectange, two different $G_{EW}$ values will appear in one grid.
+	\item The meridian and equator are different in length, grids at different latitudes own different $G_{NS}$ values.
+	\item If the precision of the grid is not high enough, the grid is not a rectange, two different $G_{EW}$ values will appear in one grid.
 \end{itemize}
 In fact, under the same GeoHash bits, whether it is ``Earth Ellipsoid'' or ``Earth Spheroid'', the length of the two edges of a grid depends only on latitude.
 If we need the accurate length of the two edges, we should start a deep discussion about ``Length of a degree of longitude'' and ``Length of a degree of latitude'', which are beyond the research scope of this paper.
-Here we list our final calculation formulas when the earth is modelled by an ellipsoid, this is much more complicated than the spherical earth.
-Formula (3), (4), (5), (6) and (7), and Figure 9 are for readers' reference only.
+Here we list our final calculation formulas when the earth is modelled by an ellipsoid, this is much more complicated but accurate than the spherical earth.
+Formula (3), (4), (5), (6) and (7), and Figure 9 are for readers' reference only\cite{osborne2013mercator}. They are used to calculate the length of each side of a grid.
 \begin{equation}
-    a=\frac{L_{equator}}{2\pi}\quad b=\frac{L_{meridian}}{2\pi}
+	a=\frac{L_{equator}}{2\pi}\quad b=\frac{L_{meridian}}{2\pi}
 \end{equation}
 \begin{equation}
-    f=\frac{a-b}{a}\quad e^2=f(2-f)
+	f=\frac{a-b}{a}\quad e^2=f(2-f)
 \end{equation}
 \begin{equation}
-    G_{EW}(\varphi)=\frac{2\pi a\cos(\varphi)}{2^{geobit/2}\sqrt{1-e^2\sin^2\varphi}} 
+	\bigtriangleup\varphi=\frac{180}{2^{geobit/2}}
 \end{equation}
 \begin{equation}
-    \bigtriangleup\varphi=\frac{180}{2^{geobit/2}}
+	G_{EW}(k)=\frac{2\pi a\cos(k\Delta\varphi)}{2^{geobit/2}\sqrt{1-e^2\sin^2k\Delta\varphi}}
 \end{equation}
 \begin{equation}
-    G_{NS}(\varphi)=a(1-e^2)\int_{\varphi-\bigtriangleup\varphi}^\varphi{(1-e^2\sin^2\varphi)}^{-\frac32}\operatorname d\varphi
+	G_{NS}(k)=a(1-e^2)\int_{k\Delta\varphi}^{(k+1)\Delta\varphi}\frac{\operatorname d\phi}{{(1-e^2\sin^2\phi)}^\frac32}
+\end{equation}
+\begin{equation}
+	k\in\{-2^{geobit/2-1}, -2^{geobit/2-1}+1, \ldots, 2^{geobit/2-1}-1\}
 \end{equation}
 \begin{figure}[htb]
 	\centering\includegraphics[width=\linewidth]{earth.png}
 	\caption{Grid of elliptical earth}
 \end{figure}
+\\
+In reality, any GeoHash grid in our GIS has 3 side lengths, which are represented by $G_{NS}(n)$, $G_{EW}(n)$ and $G'_{NS}(n)$ respectively in Figure 9.
+The two sides in the north-south direction are different in length.
+\subsection{Grid Storage}
+\subsection{Grid Quantification}
 \section{Test}
 \section{Conclusions}
 %%
