@@ -265,10 +265,10 @@ We denote the two intervals by binary number ``0'' and ``1'' respectively.
 In an equivalent way, we divide the latitude into two intervals: [-90\degree, 0\degree], [0\degree, 90\degree] and denote them by ``0'' and ``1''.
 \\
 Then we can use ``00'', ``01'', ``10'', ``11'' to represent the four grids.
-Refer to Figure 8, it gives examples of ``divide the earth into 4 grids'' and ``divide the earth into 16 grids''.
+Figure 8 gives examples of ``divide the earth into 4 grids'' and ``divide the earth into 16 grids''.
 But in this way, the area of each grid is very large, and the grid precision is too low.
-We can use the same method to further subdivide into 16, 64 grids, etc.
-For higher precision and smaller length, we only need to add the bits of GeoHash binary which means the earth is divided into more and smaller grids.
+The same way is used to further subdivide into 16, 64 grids, etc.
+We get higher precision by adding the bits of GeoHash binary which means the earth is divided into more and smaller grids.
 \begin{figure}[htb]
 	\centering
 	\subfigure[4 Grids]{
@@ -282,9 +282,9 @@ For higher precision and smaller length, we only need to add the bits of GeoHash
 \subsection{Gird Size}
 %%In addition, we found that these grids can be strung to an z-order curve, which means we can store the two-dimensional map grids in a one-dimensional array.
 %%Any user shall belong to a grid.
-The following Table 1 contrasts the geographical length and GeoHash bit length at around 30\degree\ latitude.
+The following Table 1 contrasts the geographical length and GeoHash bits length at around 30\degree\ latitude.
 \begin{table}[htb]
-	\caption{Comparison table of GeoHash bit and estimated geographical length of one grid at 30\degree\ latitude}
+	\caption{Comparison table of GeoHash bits and estimated geographical length of one grid (around 30\degree\ latitude)}
 	\begin{tabular}{lll}
 		\toprule
 		East-West Length(m) & South-North Length(m) & Bits \\
@@ -316,7 +316,7 @@ Since the geometric shape of the earth is a sphere, even with the same GeoHash b
 Attention: the length data in Table 1 is generated from the grids around 30\degree\ latitude, it doesn't represent all the grids or an average value.
 \\
 Use the following formulas (1) and (2) to estimate the length of the two edges of a grid and it assumes the earth is completely spherical.
-We use $G_{NS}$ to represent the length of north-south edge and $G_{EW}$ to represent the length of east-west edge as they are in Figure 9.
+We use $G_{NS}$ to represent the length of north-south edge and $G_{EW}$ to represent the length of east-west edge as they are stroked in Figure 9.
 The index $geobit$ is the length of total GeoHash bits which is used to represent a grid.
 The length of a meridian which is $L_{meridian}$ in Formula (1) has been estimated at 20,003.93 km (12,429.9 miles) on a modern ellipsoid model of the earth (WGS 84)\cite{weintrit2013so}.
 The length of the equator which is $L_{equator}$ in Formula (2) is about 40,075 km (24,901 miles) long\cite{equator2011}.
@@ -329,8 +329,8 @@ Formula (2) is used to estimate the length of the east-west edge of a grid at la
 	G_{EW}(\varphi)\approx\frac{L_{equator}\times\cos(\varphi)}{2^{geobit/2}}
 \end{equation}
 \\
-The reason why the word ``estimate'' is used when caculating $G_{NS}$ and $G_{EW}$ is that the earth is actually elliptical.
-earth ellipsoid will cause the following two issues:
+The reason why the word ``estimate'' is used when caculating $G_{NS}$ and $G_{EW}$ here is that the earth is actually elliptical.
+Earth ellipsoid will cause the following two issues:
 \begin{itemize}
 	\item The meridian and equator are different in length, grids at different latitudes own different $G_{NS}$ values.
 	\item If the precision of the grid is not high enough, the grid is not a rectange, two different $G_{EW}$ values will appear in one grid.
@@ -338,7 +338,6 @@ earth ellipsoid will cause the following two issues:
 In fact, under the same GeoHash bits, whether it is ``Earth Ellipsoid'' or ``Earth Spheroid'', the length of the two edges of a grid depends only on latitude.
 If we need the accurate length of the two edges, we should start a deep discussion about ``Length of a degree of longitude'' and ``Length of a degree of latitude'', which are beyond the research scope of this paper.
 Here we list our final calculation formulas when the earth is modelled by an ellipsoid, this is much more complicated but accurate than the spherical earth.
-Formula (3), (4), (5), (6) and (7), and Figure 9 are for readers' reference only\cite{osborne2013mercator}. They are used to calculate the length of each side of a grid.
 \begin{equation}
 	a=\frac{L_{equator}}{2\pi}\quad b=\frac{L_{meridian}}{2\pi}
 \end{equation}
@@ -362,8 +361,10 @@ Formula (3), (4), (5), (6) and (7), and Figure 9 are for readers' reference only
 	\caption{Grid of elliptical earth}
 \end{figure}
 \\
-In reality, any GeoHash grid in our GIS has 3 side lengths, which are represented by $G_{NS}(n)$, $G_{EW}(n)$ and $G'_{NS}(n)$ respectively in Figure 9.
-The two sides in the north-south direction are different in length.
+Formula (3), (4), (5), (6) and (7), and Figure 9 are for readers' reference.
+They can be used to calculate the length of each side of a grid.
+The formulas are derived from \textit{The Mercator Projections}\cite{osborne2013mercator}.
+In reality, any GeoHash grid in our GIS has 3 side lengths, which are represented by $G_{NS}(k)$, $G_{EW}(k)$ and $G_{EW}(k+1)$ respectively.
 \subsection{Grid Storage}
 \subsection{Grid Quantification}
 \section{Test}
@@ -371,6 +372,7 @@ The two sides in the north-south direction are different in length.
 %%
 %% The next two lines define the bibliography style to be used, and
 %% the bibliography file.
+\bibliographystyle{unsrt}
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{refs}
 \end{document}
