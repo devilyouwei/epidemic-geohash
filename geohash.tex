@@ -234,12 +234,13 @@ Each QR code corresponds to a unique user in the real world.
 In the real world, people use the health code to know the health status of themselves or others.
 \\
 For data quantification, we need to divide the map to blocks first by using GeoHash.
-At the step of GPS data collection, we get the longitude and latitude values from users, and we can use GeoHash to calculate which block the user belongs to.
-Suppose a GeoHash block as a set $B_1$ that includes many users, we quantify the safety of $B_1$ based on confirmed cases and the total number of users in $B_1$.
-This is not enough, the historical ``visitors'' of this block also need to be considered too.
-These visitors who are diagnosed in the short term will have negative effects on the block.
+At the step of GPS data collection, we get the longitude and latitude values from the user.
+GeoHash will calculate which block the user belongs to.
+Suppose a GeoHash block as a set $B_1$ that includes many users, we quantify the safety index of $B_1$ based on confirmed cases and the total number of the user.
+The historical users, ``visitors'' in a block also need to be considered.
+These visitors who are diagnosed in the short term will have negative effects on a block.
 As discussed above (in Section 2.1), a research has proposed that the number of people infected in a region is positively correlated with the inflow of the population from high-risk areas.
-That means, when collecting position data, we need to save a current static location, as well as saving user historical locations and blocks.
+That means, when collecting position data, we noy only need to save user current position, but also need to save user historical location data.
 The general storage and calculation process is shown in Figure 7, and the detailed methods and algorithms are described in Section 4.
 \begin{figure}[htb]
 	\centering\includegraphics[width=\linewidth]{process.pdf}
