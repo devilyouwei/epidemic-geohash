@@ -92,21 +92,26 @@ Figure x has illustrated the storage data structure in Redis. Redis Hashes are m
 values. We set the user IDs as keys and user health information as values in a hash table. In the database, one block
 corresponds to one hash table and the hexadecimal code of block is the name of hash table.
 
-In this way, when a user enters a block, the hash table of the block will save the user's ID and information as a
-"key-value" pair. When the user enters another block, the user will be moved out of the current hash table and into the
-hash table corresponding to the new block.
+In this way, when the user enters a block, the hash table of the block will save the user's ID and information as a
+"key-value" pair. When the user changes the position and enters another block, the user will be moved out of the current
+hash table and then into the hash table of the new block.
 
-It is worth to note that for the blocks that there are no user in it, we call them "depopulated blocks". These blocks
-are logically existed, but they are not physically stored. Thus we free the storage space by clearing the "depopulated
-blocks". In contrast, when the first user appears in a "depopulated block", a new block will be created dynamically, a
-corresponding hash table will be generated, and the user's information is stored.
+For the blocks that there are no user in it, we call these blocks "depopulated blocks". These blocks are logically
+existed, but they are not physically stored. By clearing the "depopulated blocks" we free the storage space. In
+contrast, when a user appears in a "depopulated block", a new block will be created dynamically in the storage space,
+which means a related hash table will be generated, and the user's information will be stored in it.
 
-For the blocks that the user has entered over a period of time, the logs are recorded at row level in a relational
-database. The users' IDs are the foreign keys in the table.
+For the blocks that the user has entered historically, the logs can be recorded at row level in a relational database.
+The users' IDs are the foreign keys in the table. When we query these block track records from the database, they are
+expressed in the data structure of link or array. COVID-19 requires us to query the past 14-days block records.
 
-Based on the above storage mode, we also have a "user table". The primary key is the user's ID, and the table is used to
-save the user's basic information.
+Based on the above storage mode, we also need a "user table" in the relational database. The primary key is the user's
+ID, and the table is used to save the user's basic information.
 
-## Grid Quantification
+## 4.4 Grid Quantification
 
-下面开始介绍量化区块安全信息
+### 4.4.1 Basic Quantification Method
+
+At present, our project still uses a basic qualification method for each GeoHash block. The basic qualification method
+refers to a relatively simple analysis method, which only calculates the safety index of the block, and we define it as
+ASI (Area Safety Index).
