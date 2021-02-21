@@ -287,9 +287,9 @@ We get higher precision by adding the bits of \textbf{GeoHash} binary which mean
 \subsection{Gird Size}
 %%In addition, we found that these grids can be strung to an z-order curve, which means we can store the two-dimensional map grids in a one-dimensional array.
 %%Any user shall belong to a grid.
-The following Table 1 contrasts the geographical length and \textbf{GeoHash} bits length at around 30\degree\ latitude.
+Table 1 compares the real-world geographical distance and the length of \textbf{GeoHash} bits, the latitude is around 30\degree.
 \begin{table}[htb]
-	\caption{Comparison table of \textbf{GeoHash} bits and estimated geographical length of one grid (around 30\degree\ latitude)}
+	\caption{Comparison table of \textbf{GeoHash} bits and estimated geographical length of one grid}
 	\begin{tabular}{lll}
 		\toprule
 		East-West Length(m) & South-North Length(m) & Bits \\
@@ -427,13 +427,13 @@ For example: in a returned \textbf{GeoHash} binary code, the first bit represent
 This is for code simplicity, theoretically, as long as the encoding and decoding rules are consistent, how to sort \textbf{GeoHash} binary codes is not the most important thing here.
 \\
 If we directly save the \textbf{GeoHash} binary code of a block, a string of binary code is too long.
-In the practical production environment, we do convert binary code to hexadecimal code and store the "hex code" in the non-relational database.
+In the practical production environment, we do convert binary code to hexadecimal code and store the ``hex code'' in the non-relational database.
 Therefore, a string of hex code can represent a block, and also it contains a range of positions.
 Figure 10 shows the complete process of ``From position to \textbf{GeoHash} hex code''.
 \\
 When a position needs to be determined, hexadecimal code can be easily converted to binary code, and then the binary code can be decoded to the range of longitude and latitude by inversing \textbf{GeoHash} algorithm.
 The accuracy of restored position depends on the number of \textbf{GeoHash} bits.
-In this project, we choose 10-20 bits \textbf{GeoHash} to encode longitude and latitude respectively, so the total length of a generated \textbf{GeoHash} binary is 20-40 bits.
+In this project, we choose 10 to 20 bits \textbf{GeoHash} to encode longitude and latitude respectively, so the total length of a generated \textbf{GeoHash} binary is 20 to 40 bits.
 In the practical test, we consider such sizes of block are the most reasonable observation range for medical workers.
 Thanks to the flexibility of the algorithm, we can adjust it according to the requirements.
 \\
@@ -498,6 +498,8 @@ The calculation of $P_i$ is in Formula (11).
 	P_i=\frac{100}{(n+1)n/2}(n-i+1)
 \end{equation}
 Similarly, Formula (11) is not fixed too.
+The time weight $P_i$ decreases linearly with the increase of day.
+Of course, the condition is $n$ is a definite constant.
 It is used in our experiment, and we consider it is suitable to observe a small group and a small area.
 \\
 \section{Conclusions}
