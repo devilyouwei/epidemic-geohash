@@ -1,117 +1,74 @@
-**_未写入 latex 正式论文中的临时内容_**
+# 论文中亟待解决的问题
 
-# Geohash temporary document for paper exchange
+论文 Section 4.4 block quantification 说服力低。
 
-## GeoHash bit explanation
+问题描述：
 
-The GeoHash bit is divided into two parts, the first half part encodes longitude, the second half part encodes the
-latitude.
+我们提出了一种通过 GeoHash 方法动态划分地理区块，然后对区块进行新冠疫情特征的一些量化分析的方法，使疫情防控可以更有效的
+在 GIS（geographic information system）上进行，也可以动态缩放观察的范围，做到更灵活更精确的疫情追踪。但是区块量化分析的
+算法没有经过医学“考验”，我项目成员均无传染病研究背景，目前系统采用的算法是基于感染和疑似感染的人口密度进行风险评估的。
 
-## 4.3 Block Storage
+我们已经完成了从客户端采集用户的数据，到地理区块记载用户数据，区块安全指数量化分析的工作。但最后一步量化安全指数以确定区
+块属于“低中高”风险区。
 
-We store all these blocks and user data in common databases on the server. Considering that in the real engineering
-environment, data storage includes two parts:
+通过 GIS 我们获得一个区块 Block 如下的一些数据
 
--   user geographic location data
--   block data
+-   Rd 高风险，已确诊人数
+-   Rw 风险，接触或去过其他风险区块的人数
+-   Ro 无风险人数
+-   Rd+Rw+Ro=区块总人数
+-   INd 区块当日输入感染人数
+-   INw 区块当日输入接触人数
+-   INo 区块当日输入无风险人数
+-   Bs 区块面积
+-   以上所有变量可以获取历史记录，n 天。例如新冠是 14 天
 
-Logically speaking, one block contains many users, and one user has many position logs. Block and user information are
-bidirectional associated, which is called “many to many” in the field of computer storage. This section will discuss the
-stored data models and algorithms.
+目标结果：ASI(Area Safety Index) 地区安全指数，下图中有公式，是我们当前采用的算法。
 
-![Block Storage](./block-storage.png)
+其他可控系数：Pd, Pw, Pi，分别表示感染者影响权重，接触者影响权重，时间影响权重（按天算）。
 
-### 4.3.1 Position to GeoHash Bit
+以上使用的所有变量都是我们自己总结的，有缺少或多余都可以调整。可控系数可以在系统中设置。
 
-Before storing the block, we have to first encode the position by GeoHash. Referring to the method of grid division in
-Section 4.1, we adopt the following algorithm.
+我们力所能及的部分主要是 GeoHash 编码和划块算法的研究，以及对区块信息进行分析的方法。
 
-```js
-function geohash(latitude, longitude, bit) {
-    let res = ''
-    let lat = []
-    let lon = []
+请求获得可靠的传染病医学支撑，诚邀有意者加入我们的 paper。我们的 paper 将会向计算机领域的国际期刊或会议投递，所有参与者
+均有署名。
 
-    // limitation of longitude and latitude
-    lat[0] = -90.0
-    lat[1] = 90.0
-    lon[0] = -180.0
-    lon[1] = 180.0
+优势(论文中已经描述)，大致列一下：
 
-    if (latitude < lat[0] || latitude > lat[1] || longitude < lon[0] || longitude > lon[1])
-        throw new Error('Invalid longitude or latitude')
+1. 用户通过 GIS 软件确定风险地区，提供出行建议
+2. 采集的用户数据用于 ASI 更精确的计算
+3. 防控更有灵活性，可以根据疫情扩散的范围控制 block 范围，调整防控的范围
+4. 观察者可以集中精力研究重点的几个区块
+5. 观察者，用户通过 GIS 信息互传，获取 news 更便捷和快速，做到实时性
+6. 这种 GIS 可以运用在其他转染病，甚至是其他社会问题研究和追踪：例如犯罪，地震等
 
-    let len = bit * 2
-    while (res.length < len) {
-        // add longitude geohash bit
-        let mid = (lon[0] + lon[1]) / 2
-        if (mid > longitude) {
-            res += '0'
-            lon[1] = mid
-        } else {
-            res += '1'
-            lon[0] = mid
-        }
-        // add latitude geohash bit
-        mid = (lat[0] + lat[1]) / 2
-        if (mid > latitude) {
-            res += '0'
-            lat[1] = mid
-        } else {
-            res += '1'
-            lat[0] = mid
-        }
-    }
-    return res
-}
-```
+基于这套 GIS 项目，我们还有其他正在准备的论文，技术均已申请专利，其中第二篇仍然需要与医学领域紧密结合
 
-In the section 4.1 we have discussed that a GeoHash binary code can be divided into two parts: longitude part and
-latitude part, and they have the same number of bits. In this function, the difference is that longitude and latitude
-are rankded one by one. For example: in a returned GeoHash binary code, the first bit represents the range of longitude,
-then the second bit represents the range of latitude, and the third bit is longitude again, and so on. This is for code
-simplicity, theoretically, as long as the encoding and decoding rules are consistent, how to sort GeoHash binary codes
-is not the most important thing here.
+-   Epidemic Prevention and Control Based On GeoHash
+-   蓝牙社交网络与疫情追踪
+-   基于“泛基站”的人口特征分析
+-   “Population Accounting” on GeoHash Blockchain
+-   Personal Health and Insurance Identification
 
-### 4.3.2 GeoHash Bit to Hex
+## 图例：
 
-If we directly save the GeoHash binary code of a block, a string of binary code is too long. In the actual production
-environment, we convert binary code to hexadecimal code and store the "hex code" in **Redis**. Therefore, a string of
-hex code represents one block, and also represents a set of positions. Figure x shows the complete process of "From
-position to GeoHash hex code".
+## 目前采用的算法
 
-The advantage of using hex code is that when the position needs to be determined, hex code can be easily converted to
-binary code, and then the binary code can be decoded to the range of latitude and longitude by GeoHash algorithms. The
-accuracy of the restored position depends on the number of GeoHash bits. In this project, we choose 10-20 bits GeoHash
-to encode longitude and latitude respectively, so the total length of a generated GeoHash binary is 20-40 bits. In the
-practical test, we consider such sizes of block are the most reasonable observation range for medical workers.
+![geographic information system](./geogrids1.png)
 
-## 4.3.3 Block Storage
+![geographic information system2](./geogrids2.png)
 
-Figure x has illustrated the storage data structure in Redis. Redis Hashes are maps between string keys and string
-values. We set the user IDs as keys and user health information as values in a hash table. In the database, one block
-corresponds to one hash table and the hexadecimal code of block is the name of hash table.
+![process](./process.jpg)
 
-In this way, when the user enters a block, the hash table of the block will save the user's ID and information as a
-"key-value" pair. When the user changes the position and enters another block, the user will be moved out of the current
-hash table and then into the hash table of the new block.
+![F1](./formula-RI.jpg)
 
-For the blocks that there are no user in it, we call these blocks "depopulated blocks". These blocks are logically
-existed, but they are not physically stored. By clearing the "depopulated blocks" we free the storage space. In
-contrast, when a user appears in a "depopulated block", a new block will be created dynamically in the storage space,
-which means a related hash table will be generated, and the user's information will be stored in it.
+![F2](./formula-asi.png)
 
-For the blocks that the user has entered historically, the logs can be recorded at row level in a relational database.
-The users' IDs are the foreign keys in the table. When we query these block track records from the database, they are
-expressed in the data structure of link or array. COVID-19 requires us to query the past 14-days block records.
+![F3](./formula-pi.png)
 
-Based on the above storage mode, we also need a "user table" in the relational database. The primary key is the user's
-ID, and the table is used to save the user's basic information.
+## 参考资源文件
 
-## 4.4 Grid Quantification
+[论文草稿](./geohash.pdf)
 
-### 4.4.1 Basic Quantification Method
-
-At present, our project still uses a basic qualification method for each GeoHash block. The basic qualification method
-refers to a relatively simple analysis method, which only calculates the safety index of the block, and we define it as
-ASI (Area Safety Index).
+[专利](./geohash.docx)
