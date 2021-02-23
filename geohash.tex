@@ -468,14 +468,14 @@ COVID-19 requires us to query the past 14-days records which will generate a 14-
 It is worth noting that the COVID-19 14-days \textbf{UGBC} will be used in the next section for block quantitative analysis.
 
 \subsection{Block Quantification}
-For quantitative analysis of a block, the data we need to use include the current state of the block and the past 14 days states.
+For quantitative analysis of a block, the data we need to use include the current data and the past $n$ days historical data of a block.
 The ``14 days'' is for the example of COVID-19 because studies have shown that the longest incubation period of the virus is 14 days\cite{lauer2020incubation}.
 \\
-As mentioned in the previous sections, the purpose of the quantitative analysis described in this paper is to obtain a value \textbf{ASI} (Area Safety Index).
+The sample of quantitative analysis described in this paper is to obtain a value \textbf{ASI} (Area Safety Index).
 \textbf{ASI} is one of the most important indexes in our study, which reflects the safety degree of a block.
-The fuzzy epidemic situation can be calculated to a meaningful and clear quantity by \textbf{ASI}.
-The following is an introduction about calculating \textbf{ASI}.
-The following method is considered as our ``Basic Model''
+The safety degree can be calculated to a meaningful and definite quantity with \textbf{ASI}.
+The following is an introduction about calculating \textbf{ASI} in our \textbf{GIS}.
+The following method is considered as our ``Basic ASI Model''
 \begin{equation}
 	RI_n=\sum_{i=1}^n\left(\frac{R_d^iP_d}{R_o^i+R_w^i+R_d^i}+\frac{R_w^iP_w}{R_o^i+R_w^i+R_d^i}\right)P_i
 \end{equation}
@@ -484,19 +484,21 @@ The following method is considered as our ``Basic Model''
 \end{equation}
 In Formula (9), $RI$ (Risk Index) represents the past $n$ days risk index of a block.
 $R_d$, $R_w$ and $R_o$ are respectively the number of confirmed cases, suspected cases, and healthy cases.
-So Formula (9) actually is a risk assessment for the density of infected and suspected cases in a block.
+So Formula (9) actually is a risk assessment by calculating the density of infected and suspected cases in a block.
 Suspected cases refer to those who have symptoms of infection, or have been in contact with confirmed cases, or have visited other high-risk blocks.
-We define the blocks with \textbf{ASI} less than 60 as high-risk blocks, the standard \textbf{ASI} value of high-risk blocks can be customized according to professional medical research.
-Variable $i$ counts the days before today ($i=1$).
+We define the blocks with \textbf{ASI} less than 60 as high-risk blocks, and the standard high-risk value can be customized in our system.
+Variable $i$ counts the days before today.
 For example, ``$i=2$'' indicates yesterday, ``$i=3$'' indicates two days ago, until ``$i=n$'' is $n-1$ days ago, the total is $n$ days.
 $P_d$ is the weight of infected cases and $P_w$ is the weight of suspected cases.
 $P_i$ is the weight of time influence, the unit of time is ``day''.
-The larger the day $i$, the lower the $P_i$.
-Constants $p_i$, $p_d$, $p_w$ need to be fitted according to the medical characteristics of infectious diseases.
+Normally, the larger the day $i$ is, the lower the $P_i$ is.
+\\
+Constants $P_i$, $P_d$, $P_w$ need to be fitted according to the population in a block.
 The calculation of $P_i$ is in Formula (11).
 \begin{equation}
 	P_i=\frac{100}{(n+1)n/2}(n-i+1)
 \end{equation}
+\\
 Similarly, Formula (11) is not fixed too.
 The time weight $P_i$ decreases linearly with the increase of day.
 Of course, the condition is $n$ is a definite constant.
