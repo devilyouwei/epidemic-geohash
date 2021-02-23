@@ -67,6 +67,9 @@
 
 ![F3](./formula-pi.png)
 
+![Chart-sm](./echarts-sm.png)
+
+![Chart-lg](./echarts-lg.png)
 ## 参考资源文件
 
 [论文草稿](./geohash.pdf)
