@@ -18,3 +18,7 @@ The simulation data for confirmed cases and suspended cases in ASI is from data.
 
 -   w: warning, suspended
 -   d: danger, confirmed
+
+## Data Table
+
+Refer to arrarys in echart-lg.js, echart-sm.js

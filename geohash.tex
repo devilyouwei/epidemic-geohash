@@ -262,7 +262,7 @@ Our first step is to divide the earth into blocks or grids. \textbf{GeoHash} tec
 	\item \textbf{GeoHash} encodes a geographic location (longitude and latitude) into a string of binary codes.
 	\item Through the incremental operation of encoded binary code, these grids are chained to a Z-order curve as Figure 8.
 \end{itemize}
-How does Geohash achieve the above operations?
+How does \textbf{GeoHash} achieve the above operations?
 \\
 We know that the geographical range of longitude is from -180\degree\ to 180\degree\ and latitude is from -90\degree\ to 90\degree\ \cite{crossley1999guide}.
 We can divide the longitude into two intervals: [-180\degree, 0\degree], [0\degree, 180\degree].
@@ -474,7 +474,7 @@ The ``14 days'' is for the example of COVID-19 because studies have shown that t
 The sample of quantitative analysis described in this paper is to obtain a value \textbf{ASI} (Area Safety Index).
 \textbf{ASI} is one of the most important indexes in our study, which reflects the safety degree of a block.
 The safety degree can be calculated to a meaningful and definite quantity with \textbf{ASI}.
-The following is an introduction about calculating \textbf{ASI} in our \textbf{GIS}.
+The following is an introduction about calculating \textbf{ASI} of a block.
 The following method is considered as our ``Basic ASI Model''
 \begin{equation}
 	RI_n=\sum_{i=1}^n\left(\frac{R_d^iP_d}{R_o^i+R_w^i+R_d^i}+\frac{R_w^iP_w}{R_o^i+R_w^i+R_d^i}\right)P_i
@@ -486,37 +486,87 @@ In Formula (9), $RI$ (Risk Index) represents the past $n$ days risk index of a b
 $R_d$, $R_w$ and $R_o$ are respectively the number of confirmed cases, suspected cases, and healthy cases.
 So Formula (9) actually is a risk assessment by calculating the density of infected and suspected cases in a block.
 Suspected cases refer to those who have symptoms of infection, or have been in contact with confirmed cases, or have visited other high-risk blocks.
-We define the blocks with \textbf{ASI} less than 60 as high-risk blocks, and the standard high-risk value can be customized in our system.
-Variable $i$ counts the days before today.
-For example, ``$i=2$'' indicates yesterday, ``$i=3$'' indicates two days ago, until ``$i=n$'' is $n-1$ days ago, the total is $n$ days.
+We define the blocks with \textbf{ASI} less than 60 as high-risk blocks, and the standard of high-risk can be customized in the system.
+Variable $i$ counts the backtracking days.
+For example, ``$i=n$'' indicates today, ``$i=n-1$'' indicates yesterday, until ``$i=1$'' is the first backtracking day, the total is $n$ days.
 $P_d$ is the weight of infected cases and $P_w$ is the weight of suspected cases.
 $P_i$ is the weight of time influence, the unit of time is ``day''.
-Normally, the larger the day $i$ is, the lower the $P_i$ is.
+Normally, the larger the day $i$ is, the higher the $P_i$ is.
 \\
 Constants $P_i$, $P_d$, $P_w$ need to be fitted according to the population in a block.
 The calculation of $P_i$ is in Formula (11).
 \begin{equation}
-	P_i=\frac{100}{(n+1)n/2}(n-i+1)
+	P_i=\frac{100i}{(n+1)n/2}
 \end{equation}
 \\
-Similarly, Formula (11) is not fixed too.
-The time weight $P_i$ decreases linearly with the increase of day.
-Of course, the condition is $n$ is a definite constant.
-It is used in our experiment, and we consider it is suitable to observe a small group and a small area.
+The time weight $P_i$ increase linearly with the increase of day $i$.
+$n$ is a constant and it is the number of backtracking days in ASI calculation.
 \\
+\section{Experiments}
+Two groups of experiments are carried out on the block with large population and the block with small population.
+The collective conditions of the two experiments for calculating ASI are:
+\begin{enumerate}
+	\item Simulate confirmed cases, suspected cases within 42 days.
+	\item The backtracking time is 14 days, so $n=14$.
+	\item If the backtrackable time is less than 14 days, set $n=i$.
+	\item The total population in a block fluctuates up and down within a range.
+	\item Upon ASI decreases to 60, the block will trigger lockdown, the population stops flowing in or out.
+\end{enumerate}
+We use \textbf{Apache Echart}\footnote{https://echarts.apache.org/examples/en/editor.html?c=mix-line-bar} to visualize the experimental results.
+In Figure 12, the red line is the cordon of lockdown which also means under it is a high-risk period.
+When \textbf{ASI} touches the red line, we think it is necessary to take lockdown or other effective measures.
+The yellow line represents the trend of \textbf{ASI}.
+The blue bar indicates the number of confirmed cases and the green bar indicates the number of suspected cases.
+Both of the confirmed and suspected cases increase from day 1, and decrease after reaching the peak until 0.
+
+\subsection{Small Population}
+For small population block, we assume the following conditions:
+\begin{enumerate}
+	\item The population range is $[500,1000]$ in a block.
+	\item $P_d=45$ and $P_w=15$.
+\end{enumerate}
+The experimental results of small population block have been plotted as shown in Figure 12, ``Small population''.
+When the confirmed cases and suspected cases increaes, \textbf{ASI} decreases.
+\textbf{ASI} decreases to $46.47$ on day 10 and drops to $0$ on day 15.
+Until day 31, \textbf{ASI} returns to above 60.
+So we can set the block in high-risk from day 10 to 31.
+
+\subsection{Large Population}
+For large population block, we assume the following conditions:
+\begin{enumerate}
+	\item The population range is $[960000,1000000]$ in a block.
+	\item $P_d=8000$ and $P_w=4000$.
+\end{enumerate}
+The experimental results of large population block have been plotted as shown in Figure 12, ``Large population''.
+From the ``Large population'' chart, \textbf{ASI} decreases to $47.35$ on day 13 and goes back to $68$ on day 27.
+Then we set the block in high-risk from day 13 to 27.
+
+\begin{figure*}[hptb]
+	\centering{
+		\subfigure[Small population]{
+			\includegraphics[width=16cm,height=10.5cm]{echarts-sm.png}
+		}
+		\subfigure[Large population]{
+			\includegraphics[width=16cm,height=10.5cm]{echarts-lg.png}
+		}
+		\caption{Experimental results charts}
+	}
+\end{figure*}
+\newpage
+
 \section{Conclusions}
+The conclusion is
 \section{Future Work}
-We can do other data analysis on a block to get other results to enhance the epidemic control ability.
-Such as the medical level of a block, and even predict the possibility value of an epidemic outbreak in an area.
-These are the directions that can be studied based on \textbf{GeoHash} blocks, and we are also working on these studies, but in this paper they are not introduced.
+In addition to \textbf{ASI}, we can also conduct other types of data analysis based on \textbf{GeoHash} blocks, and get more useful results to help us carry out epidemic prevention and control.
+Such as the medical level of a block, and even predict the possibility value of an epidemic outbreak in a block.
+These are the directions that can be studied based on \textbf{GeoHash} blocks, and we are working on these studies.
 \\
-Algorithms will be improved following the new progress of medical research to handle the pandemic.
+Algorithms will be improved by following the new progress of medical research to handle the changing pandemic.
 We need to take more interdisciplinary cooperation, especially in infectious disease medicine and bioinformatics.
-Medical professionals can help us to find more suitable risk assessment models and algorithms.
+Medical professionals can help us to find more suitable risk assessment models and algorithms on \textbf{GeoHash}.
 \\
-Considering the similarity of data structure, we are trying to use blockchain technology to decentralize the storage and calculation of data.
-Other international research teams have also carried out research on blockchain using for infectious diseases and health.\cite{nguyen2020blockchain}\cite{CryptocurrencyNewUse2020Coronavirus}
-The contents include: \textbf{GeoHash} block information, user GeoHash block chain, weight parameters, virus information, vaccination records,Immunization record, etc.
+Considering the similarity of data structure, we are trying to use blockchain technology to decentralize the storage and calculation of epidemic data.
+We note that other international research teams have also carried out research on blockchain using for health care domain.\cite{nguyen2020blockchain}\cite{CryptocurrencyNewUse2020Coronavirus}
 Blockchain technology can help us reduce the pressure of central storage, protect the privacy of users through anonymity\cite{nakamoto2019bitcoin}, and ensure that the data can not be tampered.\cite{armstrong2016move}
 \bibliographystyle{unsrt}
 \bibliography{refs}
