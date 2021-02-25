@@ -514,7 +514,6 @@ The collective conditions of the two experiments for calculating ASI are:
 \end{enumerate}
 We use \textbf{Apache Echart}\footnote{https://echarts.apache.org/examples/en/editor.html?c=mix-line-bar} to visualize the experimental results.
 In Figure 12, the red line is the cordon of lockdown which also means under it is a high-risk period.
-When \textbf{ASI} touches the red line, we think it is necessary to take lockdown or other effective measures.
 The yellow line represents the trend of \textbf{ASI}.
 The blue bar indicates the number of confirmed cases and the green bar indicates the number of suspected cases.
 Both of the confirmed and suspected cases increase from day 1, and decrease after reaching the peak until 0.
@@ -555,7 +554,12 @@ Then we set the block in high-risk from day 13 to 27.
 \newpage
 
 \section{Conclusions}
-The conclusion is
+Based on GIS, we study the \textbf{GeoHash} encoding and dividing blocks from geographic locations.
+The dynamic storage, dynamic display and dynamic scaling of blocks are realized.
+According to the population, cases in each block, the \textbf{ASI} was obtained by quantitative analysis algorithm.
+ASI can effectively support medical work, and also provide users with travel safety suggestions.
+Finally, taking COVID-19 epidemic as an example, through two groups of experiments, we test the large population and small population blocks to ensure the reliability of \textbf{ASI} algorithm.
+When \textbf{ASI} is lower than 60, we think it is necessary to take lockdown or other effective measures of the block.
 \section{Future Work}
 In addition to \textbf{ASI}, we can also conduct other types of data analysis based on \textbf{GeoHash} blocks, and get more useful results to help us carry out epidemic prevention and control.
 Such as the medical level of a block, and even predict the possibility value of an epidemic outbreak in a block.
