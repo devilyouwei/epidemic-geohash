@@ -106,7 +106,7 @@ In the practical and experimental scenarios, we use mobile application and web t
 It works for medical workers as a visual auxiliary tool and share with users the results of epidemic data analysis in real time.
 The \textbf{ASI} in Figure 3 is a value of ``Area Safety Index'', which is the focus of this paper.
 \textbf{ASI} represents the risk level of a region.
-The system contributes to enlighten and support decisions of governments, medical institutions, residents, and other researchers who are concerned about the epidemic.
+The system contributes to the decisions of governments, medical institutions, residents, and other researchers who are concerned about the epidemic.
 \\
 The core idea of this paper is to divide the earth to blocks. Blocks have the following characteristics:
 \begin{enumerate}
@@ -120,7 +120,7 @@ The core idea of this paper is to divide the earth to blocks. Blocks have the fo
 The last item in the above list indicates that the purpose of dividing to blocks is to perform quantitative analysis of the epidemic situation.
 \\
 We will also introduce other related work in controlling epidemic by using the similar information technology and computer visualization technology.
-The paper will mainly focus on how to use \textbf{GeoHash} to divide blocks, and explain the methods of quantifing epidemic data on \textbf{GeoHash} blocks.
+The paper will mainly focus on how to use \textbf{GeoHash} to divide blocks, and explain the methods of quantifying epidemic data on \textbf{GeoHash} blocks.
 
 \begin{figure*}[hptb]
 	\centering{
@@ -168,9 +168,9 @@ These two figures in Figure 4 are similar to the previous Figure 2, except that 
 Contents in these maps include like: confirmed cases, deaths, historical cases, added cases, regional lockdown status, and etc.
 Some weaknesses of such kind of maps are discussed in the introduction section (Section 1).
 \\
-The bar charts and line charts are aslo widely used in epidemic data analysis.
+The bar charts and line charts are also widely used in epidemic data analysis.
 These graphs are mostly used to show the trend of epidemic situation and transmission cycle.
-Figure 5 showws an example that uses both bar chart and line chart to perform the trend of daily new cases from Jan. 2020 to Jan. 2021 in the United States.
+Figure 5 shows an example that uses both bar chart and line chart to perform the trend of daily new cases from Jan. 2020 to Jan. 2021 in the United States.
 The red line in this chart is the 7-day moving average curve.
 Other trends from different types of data, such as death trends, can be found on the official CDC\footnote{https://covid.cdc.gov/covid-data-tracker} website.
 \begin{figure}[htb]
@@ -224,7 +224,7 @@ Quantitative analysis of data is a more complex process and our work is to quant
 \\
 For data collection, the system can provide a mobile application for users to view the surrounding epidemic situation.
 At the same time, in order to obtain the surrounding epidemic safety situation, users need to upload their own GPS information.
-Under the privacy policy, we only collect users' GPS information, but we will not save users' personal informationa. So we don't track or monitor users' locations in the system.
+Under the privacy policy, we only collect users' GPS information, but we will not save users' personal information. So we don't track or monitor users' locations in the system.
 This method of collection is carried out anonymously, and each record is stored as a virtual and unknown identity which means only users know their own locations but other users cannot get it.
 \\
 After the diagnosis, the medical workers mark the confirmed cases through their virtual identities.
@@ -334,11 +334,11 @@ Formula (2) is used to estimate the length of the east-west edge of a grid at la
 	G_{EW}(\varphi)\approx\frac{L_{equator}\times\cos(\varphi)}{2^{geobit/2}}
 \end{equation}
 \\
-The reason why the word ``estimate'' is used when caculating $G_{NS}$ and $G_{EW}$ here is that the earth is actually elliptical.
+The reason why the word ``estimate'' is used when calculating $G_{NS}$ and $G_{EW}$ here is that the earth is actually elliptical.
 Earth ellipsoid will cause the following two issues:
 \begin{itemize}
 	\item The meridian and equator are different in length, grids at different latitudes own different $G_{NS}$ values.
-	\item If the precision of the grid is not high enough, the grid is not a rectange, two different $G_{EW}$ values will appear in one grid.
+	\item If the precision of the grid is not high enough, the grid is not a rectangle, two different $G_{EW}$ values will appear in one grid.
 \end{itemize}
 In fact, under the same \textbf{GeoHash} bits, whether it is ``Earth Ellipsoid'' or ``Earth Spheroid'', the length of the two edges of a grid depends only on latitude.
 If we need the accurate length of the two edges, we should start a deep discussion about ``Length of a degree of longitude'' and ``Length of a degree of latitude'', which are beyond the research scope of this paper.
@@ -366,7 +366,7 @@ Here we list our final calculation formulas when the earth is modelled by an ell
 	\caption{Grid of elliptical earth}
 \end{figure}
 \\
-Formula (3), (4), (5), (6), (7) and (8), give the methods to estimate the grid size of eplliptical earth.
+Formula (3), (4), (5), (6), (7) and (8), give the methods to estimate the grid size of elliptical earth.
 They are used to calculate the length of each side of a grid.
 The formulas are derived from \textit{The Mercator Projections}\cite{osborne2013mercator}.
 Any \textbf{GeoHash} grid in our GIS has 3 different side lengths, which are represented by $G_{NS}(k)$, $G_{EW}(k)$ and $G_{EW}(k+1)$ respectively.
@@ -422,7 +422,7 @@ Referring to the description about grid division in Section 4.1, we adopt the fo
 \end{algorithm}
 \\
 In the section 4.1 we have discussed that a \textbf{GeoHash} binary code can be divided into two parts: longitude part and latitude part, and they have the same number of bits in a \textbf{GeoHash} binary code.
-In Algorithm 1, longitude and latitude are rankded one by one.
+In Algorithm 1, longitude and latitude are ranked one by one.
 For example: in a returned \textbf{GeoHash} binary code, the first bit represents the range of longitude, then the second bit represents the range of latitude, and the third bit is longitude again, and so on.
 This is for code simplicity, theoretically, as long as the encoding and decoding rules are consistent, how to sort \textbf{GeoHash} binary codes is not the most important thing here.
 \\
@@ -459,7 +459,7 @@ The users' IDs are the foreign keys in the table.
 When these block logs are queried from the database, as Figure 11, these blocks are organized as nodes in a link or an array following the user.
 We call them ``User GeoHash Block Chain'', \textbf{UGBC} for short.
 User \textbf{GeoHash} blocks are arranged in a chronological order in the chain.
-The blocks that the user entered ealier will be placed at the tail of the chain.
+The blocks that the user entered earlier will be placed at the tail of the chain.
 \begin{figure}[htb]
 	\centering\includegraphics[width=\linewidth]{block-log.png}
 	\caption{User GeoHash Block Chain}
@@ -526,7 +526,7 @@ For small population block, we assume the following conditions:
 	\item $P_d=45$ and $P_w=15$.
 \end{enumerate}
 The experimental results of small population block have been plotted as shown in Figure 12, ``Small population''.
-When the confirmed cases and suspected cases increaes, \textbf{ASI} decreases.
+When the confirmed cases and suspected cases increase, \textbf{ASI} decreases.
 \textbf{ASI} decreases to $46.47$ on day 10 and drops to $0$ on day 15.
 Until day 31, \textbf{ASI} returns to above 60.
 So we can set the block in high-risk from day 10 to 31.
