@@ -13,15 +13,15 @@
 
 通过 GIS 我们获得一个区块 Block 如下的一些数据
 
--   Rd 高风险，已确诊人数
--   Rw 风险，接触或去过其他风险区块的人数
--   Ro 无风险人数
--   Rd+Rw+Ro=区块总人数
--   INd 区块当日输入感染人数
--   INw 区块当日输入接触人数
--   INo 区块当日输入无风险人数
--   Bs 区块面积
--   以上所有变量可以获取历史记录，n 天。例如新冠是 14 天
+- Rd 高风险，已确诊人数
+- Rw 风险，接触或去过其他风险区块的人数
+- Ro 无风险人数
+- Rd+Rw+Ro=区块总人数
+- INd 区块当日输入感染人数
+- INw 区块当日输入接触人数
+- INo 区块当日输入无风险人数
+- Bs 区块面积
+- 以上所有变量可以获取历史记录，n 天。例如新冠是 14 天
 
 目标结果：ASI(Area Safety Index) 地区安全指数，下图中有公式，是我们当前采用的算法。
 
@@ -45,13 +45,13 @@
 
 基于这套 GIS 项目，我们还有其他正在准备的论文，技术均已申请专利，其中第二篇仍然需要与医学领域紧密结合
 
--   Epidemic Prevention and Control Based On GeoHash
--   蓝牙社交网络与疫情追踪
--   基于“泛基站”的人口特征分析
--   “Population Accounting” on GeoHash Blockchain
--   Personal Health and Insurance Identification
+- Epidemic Prevention and Control Based On GeoHash
+- 蓝牙社交网络与疫情追踪
+- 基于“泛基站”的人口特征分析
+- “Population Accounting” on GeoHash Blockchain
+- Personal Health and Insurance Identification
 
-## 图例：
+## 图例
 
 ## 目前采用的算法
 
@@ -70,6 +70,7 @@
 ![Chart-sm](./echarts-sm.png)
 
 ![Chart-lg](./echarts-lg.png)
+
 ## 参考资源文件
 
 [论文草稿](./geohash.pdf)

@@ -1,0 +1,646 @@
+%% paper_template.tex is a modification of:
+%% bare_conf.tex 
+%% V1.2
+%% 2002/11/18
+%% by Michael Shell
+%% mshell@ece.gatech.edu
+%% 
+%% This is a skeleton file demonstrating the use of IEEEtran.cls 
+%% (requires IEEEtran.cls version 1.6b or later) with an IEEE conference paper.
+%% 
+%% Support sites:
+%% http://www.ieee.org
+%% and/or
+%% http://www.ctan.org/tex-archive/macros/latex/contrib/supported/IEEEtran/ 
+%%
+%% This code is offered as-is - no warranty - user assumes all risk.
+%% Free to use, distribute and modify.
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. IEEE's font choices can trigger bugs that do  ***
+% *** not appear when using other class files.                            ***
+% Testflow can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/supported/IEEEtran/testflow
+
+
+% Note that the a4paper option is mainly intended so that authors in
+% countries using A4 can easily print to A4 and see how their papers will
+% look in print. Authors are encouraged to use U.S. letter paper when 
+% submitting to IEEE. Use the testflow package mentioned above to verify
+% correct handling of both paper sizes by the author's LaTeX system.
+%
+% Also note that the "draftcls" or "draftclsnofoot", not "draft", option
+% should be used if it is desired that the figures are to be displayed in
+% draft mode.
+%
+% This paper can be formatted using the % (instead of conference) mode.
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++
+%\documentclass[conference]{IEEEims} % Modified for MTT-IMS
+%\documentclass[conference]{IMSTemplate}
+\documentclass[conference]{IEEEtran}
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++
+% If the IEEEtran.cls has not been installed into the LaTeX system files, 
+% manually specify the path to it:
+% \documentclass[conference]{../sty/IEEEtran} 
+
+
+% some very useful LaTeX packages include:
+
+%\usepackage{cite}      % Written by Donald Arseneau
+                        % V1.6 and later of IEEEtran pre-defines the format
+                        % of the cite.sty package \cite{} output to follow
+                        % that of IEEE. Loading the cite package will
+                        % result in citation numbers being automatically
+                        % sorted and properly "ranged". i.e.,
+                        % [1], [9], [2], [7], [5], [6]
+                        % (without using cite.sty)
+                        % will become:
+                        % [1], [2], [5]--[7], [9] (using cite.sty)
+                        % cite.sty's \cite will automatically add leading
+                        % space, if needed. Use cite.sty's noadjust option
+                        % (cite.sty V3.8 and later) if you want to turn this
+                        % off. cite.sty is already installed on most LaTeX
+                        % systems. The latest version can be obtained at:
+                        % http://www.ctan.org/tex-archive/macros/latex/contrib/supported/cite/
+
+%\usepackage{graphicx}  % Written by David Carlisle and Sebastian Rahtz
+                        % Required if you want graphics, photos, etc.
+                        % graphicx.sty is already installed on most LaTeX
+                        % systems. The latest version and documentation can
+                        % be obtained at:
+                        % http://www.ctan.org/tex-archive/macros/latex/required/graphics/
+                        % Another good source of documentation is "Using
+                        % Imported Graphics in LaTeX2e" by Keith Reckdahl
+                        % which can be found as esplatex.ps and epslatex.pdf
+                        % at: http://www.ctan.org/tex-archive/info/
+% NOTE: for dual use with latex and pdflatex, instead load graphicx like:
+%\ifx\pdfoutput\undefined
+%\usepackage{graphicx}
+%\else
+%\usepackage[pdftex]{graphicx}
+%\fi
+%+++++++++++++++++++++++++++++++++++++++++++
+% Added to commands
+\input epsf
+\usepackage{graphicx}
+%+++++++++++++++++++++++++++++++++++++++++++
+% However, be warned that pdflatex will require graphics to be in PDF
+% (not EPS) format and will preclude the use of PostScript based LaTeX
+% packages such as psfrag.sty and pstricks.sty. IEEE conferences typically
+% allow PDF graphics (and hence pdfLaTeX). However, IEEE journals do not
+% (yet) allow image formats other than EPS or TIFF. Therefore, authors of
+% journal papers should use traditional LaTeX with EPS graphics.
+%
+% The path(s) to the graphics files can also be declared: e.g.,
+% \graphicspath{{../eps/}{../ps/}}
+% if the graphics files are not located in the same directory as the
+% .tex file. This can be done in each branch of the conditional above
+% (after graphicx is loaded) to handle the EPS and PDF cases separately.
+% In this way, full path information will not have to be specified in
+% each \includegraphics command.
+%
+% Note that, when switching from latex to pdflatex and vice-versa, the new
+% compiler will have to be run twice to clear some warnings.
+
+
+%\usepackage{psfrag}    % Written by Craig Barratt, Michael C. Grant,
+                        % and David Carlisle
+                        % This package allows you to substitute LaTeX
+                        % commands for text in imported EPS graphic files.
+                        % In this way, LaTeX symbols can be placed into
+                        % graphics that have been generated by other
+                        % applications. You must use latex->dvips->ps2pdf
+                        % workflow (not direct pdf output from pdflatex) if
+                        % you wish to use this capability because it works
+                        % via some PostScript tricks. Alternatively, the
+                        % graphics could be processed as separate files via
+                        % psfrag and dvips, then converted to PDF for
+                        % inclusion in the main file which uses pdflatex.
+                        % Docs are in "The PSfrag System" by Michael C. Grant
+                        % and David Carlisle. There is also some information 
+                        % about using psfrag in "Using Imported Graphics in
+                        % LaTeX2e" by Keith Reckdahl which documents the
+                        % graphicx package (see above). The psfrag package
+                        % and documentation can be obtained at:
+                        % http://www.ctan.org/tex-archive/macros/latex/contrib/supported/psfrag/
+
+%\usepackage{subfigure} % Written by Steven Douglas Cochran
+                        % This package makes it easy to put subfigures
+                        % in your figures. i.e., "figure 1a and 1b"
+                        % Docs are in "Using Imported Graphics in LaTeX2e"
+                        % by Keith Reckdahl which also documents the graphicx
+                        % package (see above). subfigure.sty is already
+                        % installed on most LaTeX systems. The latest version
+                        % and documentation can be obtained at:
+                        % http://www.ctan.org/tex-archive/macros/latex/contrib/supported/subfigure/
+
+%\usepackage{url}       % Written by Donald Arseneau
+                        % Provides better support for handling and breaking
+                        % URLs. url.sty is already installed on most LaTeX
+                        % systems. The latest version can be obtained at:
+                        % http://www.ctan.org/tex-archive/macros/latex/contrib/other/misc/
+                        % Read the url.sty source comments for usage information.
+
+%\usepackage{stfloats}  % Written by Sigitas Tolusis
+                        % Gives LaTeX2e the ability to do double column
+                        % floats at the bottom of the page as well as the top.
+                        % (e.g., "\begin{figure*}[!b]" is not normally
+                        % possible in LaTeX2e). This is an invasive package
+                        % which rewrites many portions of the LaTeX2e output
+                        % routines. It may not work with other packages that
+                        % modify the LaTeX2e output routine and/or with other
+                        % versions of LaTeX. The latest version and
+                        % documentation can be obtained at:
+                        % http://www.ctan.org/tex-archive/macros/latex/contrib/supported/sttools/
+                        % Documentation is contained in the stfloats.sty
+                        % comments as well as in the presfull.pdf file.
+                        % Do not use the stfloats baselinefloat ability as
+                        % IEEE does not allow \baselineskip to stretch.
+                        % Authors submitting work to the IEEE should note
+                        % that IEEE rarely uses double column equations and
+                        % that authors should try to avoid such use.
+                        % Do not be tempted to use the cuted.sty or
+                        % midfloat.sty package (by the same author) as IEEE
+                        % does not format its papers in such ways.
+
+%\usepackage{amsmath}   % From the American Mathematical Society
+                        % A popular package that provides many helpful commands
+                        % for dealing with mathematics. Note that the AMSmath
+                        % package sets \interdisplaylinepenalty to 10000 thus
+                        % preventing page breaks from occurring within multiline
+                        % equations. Use:
+%\interdisplaylinepenalty=2500
+                        % after loading amsmath to restore such page breaks
+                        % as IEEEtran.cls normally does. amsmath.sty is already
+                        % installed on most LaTeX systems. The latest version
+                        % and documentation can be obtained at:
+                        % http://www.ctan.org/tex-archive/macros/latex/required/amslatex/math/
+
+
+
+% Other popular packages for formatting tables and equations include:
+
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty which improves the
+% LaTeX2e array and tabular environments to provide better appearances and
+% additional user controls. array.sty is already installed on most systems.
+% The latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/tools/
+
+% Mark Wooding's extremely powerful MDW tools, especially mdwmath.sty and
+% mdwtab.sty which are used to format equations and tables, respectively.
+% The MDWtools set is already installed on most LaTeX systems. The lastest
+% version and documentation is available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/supported/mdwtools/
+
+
+% V1.6 of IEEEtran contains the IEEEeqnarray family of commands that can
+% be used to generate multiline equations as well as matrices, tables, etc.
+
+
+% Also of notable interest:
+
+% Scott Pakin's eqparbox package for creating (automatically sized) equal
+% width boxes. Available:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/supported/eqparbox/
+
+
+
+% Notes on hyperref:
+% IEEEtran.cls attempts to be compliant with the hyperref package, written
+% by Heiko Oberdiek and Sebastian Rahtz, which provides hyperlinks within
+% a document as well as an index for PDF files (produced via pdflatex).
+% However, it is a tad difficult to properly interface LaTeX classes and
+% packages with this (necessarily) complex and invasive package. It is
+% recommended that hyperref not be used for work that is to be submitted
+% to the IEEE. Users who wish to use hyperref *must* ensure that their
+% hyperref version is 6.72u or later *and* IEEEtran.cls is version 1.6b 
+% or later. The latest version of hyperref can be obtained at:
+%
+% http://www.ctan.org/tex-archive/macros/latex/contrib/supported/hyperref/
+%
+% Also, be aware that cite.sty (as of version 3.9, 11/2001) and hyperref.sty
+% (as of version 6.72t, 2002/07/25) do not work optimally together.
+% To mediate the differences between these two packages, IEEEtran.cls, as
+% of v1.6b, predefines a command that fools hyperref into thinking that
+% the natbib package is being used - causing it not to modify the existing
+% citation commands, and allowing cite.sty to operate as normal. However,
+% as a result, citation numbers will not be hyperlinked. Another side effect
+% of this approach is that the natbib.sty package will not properly load
+% under IEEEtran.cls. However, current versions of natbib are not capable
+% of compressing and sorting citation numbers in IEEE's style - so this
+% should not be an issue. If, for some strange reason, the user wants to
+% load natbib.sty under IEEEtran.cls, the following code must be placed
+% before natbib.sty can be loaded:
+%
+% \makeatletter
+% \let\NAT@parse\undefined
+% \makeatother
+%
+% Hyperref should be loaded differently depending on whether pdflatex
+% or traditional latex is being used:
+%
+%\ifx\pdfoutput\undefined
+%\usepackage[hypertex]{hyperref}
+%\else
+%\usepackage[pdftex,hypertexnames=false]{hyperref}
+%\fi
+%
+% Pdflatex produces superior hyperref results and is the recommended
+% compiler for such use.
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor IEEEtran}
+\begin{document}
+
+% paper title
+%\title{Submission Format for IPVC-CyberSec21 (Title in 24-point Times font)}
+% If the \LARGE is deleted, the title font defaults to  24-point.
+% Actually, 
+% the \LARGE sets the title at 17 pt, which is close enough to 18-point.
+%+++++++++++++++++++++++++++++++++++++++++++
+\title{Paper Title\\}
+
+
+\author{First A. Author$^{1}$, Second B. Author$^{2,*}$, Third C. Author$^{3}$\\
+	\normalsize $^{1}$First Affiliation, City, State, Country\\
+	\normalsize $^{2}$Second Affiliation, City, State, Country\\
+	\normalsize $^{3}$Third Affiliation, City, State, Country\\
+	\normalsize author1@email.br, author2@email.com, author3@email.com\\
+	\normalsize *corresponding author
+}
+%+++++++++++++++++++++++++++++++++++++++++++
+
+% use only for invited papers
+%\specialpapernotice{(Invited Paper)}
+
+% make the title area
+\maketitle
+
+\begin{abstract}
+Use 9 point Times New Roman Bold for the abstract. Set your line spacing to be 10 points rather than single space. Indent the first line by 0.125 inches and type the word ``Abstract'' in 9 point Times New Roman Bold Italic. This should be followed by two spaces, a long dash (option / shift / minus), two spaces, and then the first word of your abstract (as shown above). A more professional look will result if all the spaces are set to a font style of regular rather than bold. Times font is an acceptable substitute for Times New Roman font. After the abstract, you should list a few key words from the IEEE approved “Index Terms” (send email to keywords@ieee.org for the latest list) that describe your paper. The index terms are used by automated IEEE search engines to quickly locate your paper. Typically, you should list about 5 to 7 key words, in alphabetical order, using 9 point Times New Roman Bold font. An example is shown next.
+\end{abstract}
+\IEEEoverridecommandlockouts
+\begin{keywords}
+Ceramics, coaxial resonators, delay filters, delay-lines, power
+amplifiers.
+\end{keywords}
+% no keywords
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+%
+% for peerreview papers, inserts a page break and creates the second title.
+% Will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+
+\section{Introduction}
+% no \PARstart
+Please read through this entire template before you start using it to create your paper! This will save you and the MTT considerable time, and improve your chances for acceptance. The following information is provided to help you prepare the Initial Submission as well as the Final Paper for submission to IMS2014. (Many authors submit the same exact paper for the initial as well as the final submission. This is a common practice. See item \#4 below.) A contributor should remember that:
+\begin{enumerate} 
+ \setlength{\itemsep}{-2ex}  
+ \setlength{\parskip}{0ex} 
+ \setlength{\parsep}{0ex}
+\item Deadlines are {\itshape absolute}, don't even ask!\hfil\break
+\item Summaries may not exceed {\itshape three pages}, including all figures, tables, references, etc. Additionally, there is a size limit on the electronic version of all Summaries. In Adobe Portable Document Format (PDF), submissions may not exceed {\bfseries 2 Megabytes}.\hfil\break
+\item Acceptance rates have historically run at slightly over 50\%. There is not sufficient room within the Technical Program to accept all submissions.\hfil\break
+\item Many submitters with previous IMS experience realize that, if their submission is accepted, they will be required to submit a version of their Final Paper to be published in the Symposium Digest. As the Digest paper will be similar in length to the Summary, many contributors opt to prepare their Summary in the format required for the Digest. This template contains the instructions for the proper preparation of such a document.\hfil\break
+\item You should employ this format. This document is being made available as a template for your convenience. If you elect not to use this template, please remember that you must still adhere to the general guidelines embodied in this document concerning, but not limited to, font size, margin size, page limits, file size, etc.  
+\end{enumerate}
+
+\begin{table*}
+\centerline { TABLE 1  } 
+\vskip5pt
+\centerline { Summary of Typographical Settings}
+\vskip2pt
+\centerline{
+\vbox{\offinterlineskip
+\hrule
+%\vskip2pt\hrule\vskip2pt
+% Leading & means preamble template repeats infinitely. p.241 TeX Book.
+\halign{&\vrule#&
+\strut\quad#\hfil\quad\cr
+%Use either first and third lines following this description, OR the
+%second line.  The first choice is used when all vertical rules go to the
+%top of the first horizontal line of the table.  The second choice below
+%(with the \strut) is used when there are column headings that span
+%more than one column.  The \strut in that column line will not have the
+%vertical tic marks in the horizontal rule.  Note that a vrule is also
+%considered a column, so when using \multispanx, x is the number of
+%all columns including the ``vrule.'' 
+%height2pt&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&\cr
+&\strut &&\multispan5\hfil {\bf Font Specifics}\hfil&&\multispan9\hfil {\bf Paragraph Description}\hfil &\cr
+%&\omit &&\multispan5\hfil {\bf Font Specifics}\hfil&&\multispan9\hfil {\bf Paragraph Description}\hfil &\cr
+&{\bf Section}&&\multispan5\hfil (Times Roman unless
+specified)\hfil&&\multispan5\hfil spacing (in points)\hfil &&
+alignment&&indent&\cr
+&\omit&&style&&size&&special&&line&&before&&after&&\omit&&(in inches)&\cr
+height2pt&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&\cr
+\noalign{\hrule}
+height2pt&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&\cr
+%\noalign{\vskip2pt\hrule\vskip2pt}
+%\omit&\omit&\omit&\omit\cr
+&Title&&plain&&18&&none&&single&&6&&6&&centered&&none&\cr
+&Autohr List&&plain&&12&&mpme&&single&&6&&6&&centered&&none&\cr
+&Affiliations&&plain&&12&&none&&single&&6&&6&&centered&&none&\cr
+&Abstract&&bold&&9&&none&&exactly 10&&0&&0&&justified&&0.125 $1^{st}$ line&\cr
+&Headings&&plain&&10&&small caps&&exactly 12&&18&&6&&centered&&none&\cr
+&Subheadings&&italic&&10&&none&&exactly 12&&6&&6&&left&&none&\cr
+&Body&&plain&&10&&none&&exactly 12&&0&&0&&justified&&0.125 $1^{st}$ line&\cr
+&Paragrahps&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&\cr
+&Equations&&\multispan5 \hfil Symbol font for special characters
+\hfil&&single&&6&&6&&centered&&none&\cr
+&Figures&&\multispan5 \hfil 6 to 9 point sans serif (Helvetica)\hfil&&single&&0&&0&&centered&&none&\cr
+&Figure Captions&&plain&&9&&none &&10&&0&&0&&justified&&none, tab at 0.5&\cr
+&References&&plain&&9&&none&&10&&0&&0&&justified&&0.25 hanging&\cr
+height2pt&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&&\omit&\cr}
+\hrule}}
+\end{table*}
+\section{Overview of the Digest Format}
+All paragraphs of text, including the abstract, figure captions, and references, should be justified at the left {\itshape and the right} edges.
+
+For the Title use 18-point Times (Roman) font. Its paragraph description should be set so that the line spacing is single with 6-point spacing before and 6-point spacing after (Format $\rightarrow$ Paragraph $\rightarrow$ Indents and Spacing). The font description for the Author List and Authors' Affiliation(s) should be 12-point Times. The paragraph descriptions should be set so that the line spacing is single with 6-point spacings before and after. Use an additional line spacing of 12 points before the beginning of the double column section, as shown above.
+\section{Detailed Text Formatting}
+Using 8.5 x 11-inch paper, the top and bottom margins are 1.125 inches, and the left and right margins are
+0.85 inches. Except for Title, Authors and Affiliations, use a double column format. The column width is 3.275 inches and the column spacing is 0.25 inch.
+
+Each major section begins with a Heading in 10 point Times font centered within the column and numbered using Roman numerals (except for {{\scshape Acknowledgment} and {\scshape References}), followed by a period, a single space, and the title using an initial capital letter for each word. The remaining letters are in {\scshape small capitals}. The paragraph description of the section heading line should be set for 18 points before, 6 points after, and the line spacing should be set to exactly 12 points.
+
+For the body of your paper, use 10-point Times font and set your line spacing at ``exactly 12 points'' with 0 points before and after. Indent each paragraph by 0.125 inches. 
+
+Further details are provided in the remainder of this paper for specific situations.
+\subsection{ Major Subsections}
+As shown, denote subsections with left justified 10-point Times
+Italic. Order them with capitalized alphabetic characters (A, B,\dots ). Follow the letter designation with a period, a single space, and then the subsection title capitalizing the first letter of each word. The paragraph description of the subsection heading is set to ``exactly
+12-point'' line spacing with 6 points before and after.
+\subsection{ Equations }
+Equations should be centered in the column and numbered sequentially. Place the equation number to the right of the equation within a parenthesis, with right justification within its column. An example would be
+\begin{eqnarray}
+\oint {\bf E \cdot dL} & = & - {\partial\over \partial t}
+\int\!\!\!\int {\bf B \cdot} d {\bf S}\\
+\noalign{\hbox{or}}
+\nabla \times {\bf H} & = & {\bf J} + {\partial {\bf D} \over \partial t}.
+\end{eqnarray}
+
+Note that a period is used to properly punctuate the previous
+sentence. It is placed at the end of the second equation. {\itshape Make sure
+that any subscripts in your equations are legible and are not too
+small to read!} When referring to an equation, use the number within
+parenthesis. For example, you would usually refer to the second
+equation as (2) rather than equation (2). If possible, use the Symbol
+font for all special characters.%, or better yet, use Equation Editor or
+%MathType. 
+The paragraph description of the line containing the
+equation should be set for 6 points before and 6 points after. The
+paragraph spacing will need to be set to ``single'' rather than ``exactly
+12 point'' so that the height will autoscale to fit the equation.
+
+\section{Figures}
+Most of the following applies to Microsoft Word.  Figures should utilize as much of the column width as possible in order to maximize legibility. Use a sans serif font, such as Helvetica. Helvetica is larger and much easier to read than Times. Using 8- to 10-point Helvetica usually results in a legible figure. {\itshape Do not use any font smaller than 8-point!} It must be legible. When referring to a figure, use the abbreviation Fig. followed by its number. Place figure captions directly below each figure. Use
+9-point Times with the paragraph spacing set at ``exactly 10 points.'' Set a tab at 0.5 inch. Type ``Fig. \#.'' (\# is the numeral) then tab over to the 0.5 inch mark before beginning the text of the figure caption. Note that figure captions are always (left and right) justified, rather than centered, even if they are less than a single full line in length. See the caption for Fig. 1.
+
+Within \LaTeX\ there is basically only one option for placing figures
+within your paper.  Often the easiest way is to insert them into the
+top of the next column.
+%Within Microsoft Word there are several options for placing figures
+%within your paper. Often the easiest is to insert them between
+%existing paragraphs allowing the figures to remain in that relative
+%position. The paragraph description where the figure is inserted must
+%be set to ``single'' spacing rather than ``exactly 12 points'' in
+%order to allow the line to autoscale in height to display the entire
+%figure. Some disadvantages of this approach are that you don't have
+%total flexibility in placing figures, and that the figures will move
+%as text is inserted or deleted in any part of the document before the
+%figure. If you elect to use this approach, it is recommended that you
+%nearly complete the editing of your text before inserting any
+%figures. Remember to allow room for them, however. Then begin
+%inserting figures starting from the beginning of your document. 
+Do not lump all figures at the end of the paper!
+If you have difficulties with the titles on your figures, you can always elect to add in the titles as separate text boxes, rather than importing the titles with the graph. This is sometimes helpful in getting a lengthy vertically-oriented title to display correctly.
+\begin{figure}
+\includegraphics{figure1.pdf}
+%\epsfxsize=3.25in\epsfbox{figure1.epsi}
+\caption{ Estimated relationship between the time an author spends reading these instructions and the quality of the author's digest article.}
+\end{figure}
+
+Notice that prior to the graph, a single 12-point line is used to
+separate the preceding text from the graph. The equivalent of a blank
+line should exist between the bottom of the graph (the x-axis caption)
+and the figure caption. (In this particular case, there was no need to
+add a blank line between the x-axis label and the figure caption,
+because there was already adequate spacing provided by the image
+border.) After the figure caption, there should be a single 12-point
+blank line before the text resumes. \LaTeX\ accepts encapsulated
+post script files as figures.  Standard post script figures will not
+expand and contract to fill the designate area on the page.
+Encapsulated post script files will.  Thus, encapsulated post script
+files must obviously be only one page long.  It is often easy to convert a post
+script file to encapsulated post script.  In Linux this can be done
+with the command, ``ps2epsi.''
+%More flexibility is obtained in inserting figures if you can place
+%them exactly where you would like them to be on a page. This can be
+%accomplished by inserting the figure, selecting the figure, and then
+%choosing ``Format Picture\dots ''. Various settings allow you to place the figure at an absolute position on a page; specify if the text is supposed to flow around the figure or if the figure should move with the text, etc. If you elect to let the text flow around the figure, then remember that you will have to insert a separate text box for the caption, otherwise the figure caption is likely to become separated from the figure.
+%When importing a graph from Excel into Word, it is often helpful to
+%special-paste it in as a ``Picture (Enhanced Meta-file).'' This saves
+%file memory for Word documents. Be aware that the usual Copy
+%$\rightarrow $  Paste procedure will copy the entire Excel spreadsheet into your Word file. The Copy $\rightarrow$ Paste Special $\rightarrow$ Picture (Enhanced Metafile) command copies only the graph as a static picture. This is not a concern with PDF file submissions.
+If you decide to use color traces in your graphical data, be absolutely certain that there is no ambiguity about your graphical information when printed on a B\&W printer.
+Here is a common example of what can go wrong with the numbering and sizing of axis titles on a graph. In this case, the graph was initially pasted at a much larger size than the column width, and then reduced to fit:
+%\smallskip
+%\begin{figure}
+%\epsfxsize=3.25in\epsfbox{figure2.epsi}
+%\caption{Example of an improperly titled figure. The numerics and the labels on the axes are illegible. This will cause a submission to be rejected. Don't let this happen to you!}
+%\end{figure}
+%\smallskip
+	
+Table I on the second page was inserted using ``Insert'', ``Text
+Box'', creating the text contained in Table I, and then formatting the
+text box using all the settings available under ``Format'', ``Text
+Box\dots ''. Table I also serves as an illustration of one of the rare
+instances when the double column format requirement can be
+violated. Certain figures and tables will require the full-page width
+to display. It is usually best to place these figures and tables at
+the top, rather than in the middle or bottom of a page. Tables should be entered within a single column if this can be done cleanly, without the entry becoming too crowded.
+
+\section{Citing Previous Work}
+When referencing a journal article \cite{cantrell1}, a conference
+digest article \cite{cantrell2} or a book \cite{krauss}, place the reference numbers within square
+brackets. To simultaneously cite these references \cite{cantrell1} - \cite{krauss} use the format just demonstrated. The reference list is the last section and references are listed in the order cited. Use 9 point Times. The paragraph description is set for a line spacing of exactly 10 points with 0 point spacing before and after. A 0.25 inch hanging indention should be specified. 
+Generally speaking, references should be very detailed. For journal
+articles, list all authors by initials and last name, the title of the
+paper in quotations (capitalizing only the first letter of the first
+word, unless it would be capitalized in a sentence, e.g., a proper
+noun), the journal name in italics, the volume number, the issue
+number, the page numbers, and the date. Use the examples provided
+\cite{cantrell1} - \cite{krauss} as a guide. 
+
+For the double-blind submission, citations of the authors' own work should be worded in a way that avoids identifying any connection to the authors. Simply note your prior work in the same way as work by other authors. For example, {\bfseries do not write}, ``We (or the authors) demonstrated in [x] that$\ldots$'' Rather write, ``It was demonstrated in [x] that$\ldots$''
+%Further information on LaTeX and TeX can be found in \cite{IEEEhowto:kopka} - \cite{knuth}. 
+
+% The following statement makes the two columns on the last page more
+% or less of equal length.  Placement of this command is by trial and error.
+\vfil\eject
+
+\section{Creation of the PDF File}
+Your final submission must be IEEE Xplore Compatible, or your paper will be rejected. The IEEE PDF eXpress web site used for IMS2014 will be available to aid you in this process. IEEE PDF eXpress is an online tool that converts your document into a PDF format that complies with IEEE Xplore\textsuperscript{\textregistered} standards. Authors should check the IMS2014 web site (http://ims2014.org) for the most up-to-date instructions.  As always with a conversion to PDF, authors should {\itshape very carefully} check a printed copy.
+
+%\subsection{Subsection Heading Here}
+
+
+%\subsubsection{Subsubsection Heading Here}
+
+
+% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class option
+% should be used if it is desired that the figures are to be displayed while
+% in draft mode.
+
+% An example of a floating figure using the graphicx package.
+% Note that \label must occur AFTER (or within) \caption.
+% For figures, \caption should occur after the \includegraphics.
+%
+%\begin{figure}
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex
+%\caption{Simulation Results}
+%\label{fig_sim}
+%\end{figure}
+
+
+% An example of a double column floating figure using two subfigures.
+%(The subfigure.sty package must be loaded for this to work.)
+% The subfigure \label commands are set within each subfigure command, the
+% \label for the overall fgure must come after \caption.
+% \hfil must be used as a separator to get equal spacing
+%
+%\begin{figure*}
+%\centerline{\subfigure[Case I]{\includegraphics[width=2.5in]{subfigcase1}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex
+%\label{fig_first_case}}
+%\hfil
+%\subfigure[Case II]{\includegraphics[width=2.5in]{subfigcase2}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex
+%\label{fig_second_case}}}
+%\caption{Simulation results}
+%\label{fig_sim}
+%\end{figure*}
+
+
+
+% An example of a floating table. Note that, for IEEE style tables, the 
+% \caption command should come BEFORE the table. Table text will default to
+% \footnotesize as IEEE normally uses this smaller font for tables.
+% The \label must come after \caption as always.
+%
+%\begin{table}
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+%\caption{An Example of a Table}
+%\label{table_example}
+%\begin{center}
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{center}
+%\end{table}
+%\begin{table}
+%\caption{An Example of a Table}
+%\label{table_example}
+%\begin{center}
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{center}
+%\end{table}
+
+\section{Conclusion}
+Following these instructions will improve the quality of your paper and the IMS Digest. If you have comments, please contact one of the Steering Committee editors.
+
+% conference papers do not normally have an appendix
+
+% use section* for acknowledgment
+\section*{Acknowledgment}
+For the Summary paper submission only, no acknowledgements are allowed. 
+
+% optional entry into table of contents (if used)
+%\addcontentsline{toc}{section}{Acknowledgment}
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+% NOTE: BibTeX documentation can be easily obtained at:
+% http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% standard IEEE bibliography style from:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/supported/IEEEtran/bibtex
+%\bibliographystyle{IEEEtran.bst}
+% argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+\begin{thebibliography}{1}
+
+
+\bibitem {cantrell1}
+W. H. Cantrell, ``Tuning analysis for the high-Q class-E power
+amplifier,'' \emph{IEEE Trans. Microwave Theory \& Tech.}, vol. 48,
+no. 12, pp. 2397-2402, December 2000.
+
+\bibitem {cantrell2}
+W. H. Cantrell, and W. A. Davis, ``Amplitude modulator utilizing a
+high-Q class-E DC-DC converter'', \emph {2003 IEEE MTT-S Int. Microwave
+Symp. Dig.}, vol. 3, pp. 1721-1724, June 2003.
+
+\bibitem {krauss}
+H. L. Krauss, C. W. Bostian, and F. H. Raab, \emph{Solid State Radio Engineering}, New York: J. Wiley \& Sons, 1980.
+
+%\bibitem{IEEEhowto:kopka}
+%H.~Kopka and P.~W. Daly, \emph{A Guide to {\LaTeX}}, 3rd~ed.\hskip 1em plus
+% 0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+
+%\bibitem{lamport} L. Lamport, \emph{ {\LaTeX} A Document Preparation
+%  System}, Reading, Mass: Addison-Wesley, 1994.
+
+%\bibitem{knuth} D. E. Knuth, \emph {The \TeX book}, Reading, Mass.:
+%  Addison-Wesley, 1996.
+
+\end{thebibliography}
+\smallskip
+Note: For the Summary paper submission only, references to the authors own work should be cited as if done by others to enable a double-blind review. {\bfseries Citations must be complete and not redacted, allowing the reviewers to confirm that prior art has been properly identified and acknowledged.}
+% that's all folks
+\end{document}
