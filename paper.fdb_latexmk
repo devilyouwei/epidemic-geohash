@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex paper"] 1655994852 "paper.aux" "paper.bbl" "paper" 1655994854
+["bibtex paper"] 1655994852 "paper.aux" "paper.bbl" "paper" 1658569374
   "./refs.bib" 1655990574 6847 deadab56f34cadee009f19c6b5591c50 ""
   "/usr/local/texlive/2022/texmf-dist/bibtex/bib/ieeetran/IEEEabrv.bib" 1440712899 20898 a5d2167c380db7dfff810b085c77ed63 ""
   "/usr/local/texlive/2022/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "paper.aux" 1655994854 5899 dcd099ea0bc7cc4ca794c9d288fda901 "pdflatex"
+  "paper.aux" 1658569373 5899 dcd099ea0bc7cc4ca794c9d288fda901 "pdflatex"
   (generated)
   "paper.bbl"
   "paper.blg"
-["pdflatex"] 1655994852 "/Users/devil/Pro/epidemic-geohash/paper.tex" "paper.pdf" "paper" 1655994854
-  "/Users/devil/Pro/epidemic-geohash/paper.tex" 1655994833 39738 37f589a707b1ffc85f7703b19c4472ce ""
+["pdflatex"] 1658569371 "/Users/devil/Pro/epidemic-geohash/paper.tex" "paper.pdf" "paper" 1658569374
+  "/Users/devil/Pro/epidemic-geohash/paper.tex" 1658569370 39754 b3440f59fb60ed56c4e074dcbe9bb29b ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -91,9 +91,9 @@
   "geogrids.png" 1655935584 680756 62814210dbf0010c61fd1ed4fef36817 ""
   "hubei.png" 1655935584 730280 121136a7335311e4be3bffc7a96f3236 ""
   "linebar-us-1-15.png" 1655935584 22544 2afb3d5a2ab70abb5c56c69adbfc3434 ""
-  "paper.aux" 1655994854 5899 dcd099ea0bc7cc4ca794c9d288fda901 "pdflatex"
+  "paper.aux" 1658569373 5899 dcd099ea0bc7cc4ca794c9d288fda901 "pdflatex"
   "paper.bbl" 1655994852 4741 e87cae0e58ec224abdd3fb1610eabf72 "bibtex paper"
-  "paper.tex" 1655994833 39738 37f589a707b1ffc85f7703b19c4472ce ""
+  "paper.tex" 1658569370 39754 b3440f59fb60ed56c4e074dcbe9bb29b ""
   "process.jpg" 1655935584 120708 7ef3dca9a03295d7af1ad77cce17e195 ""
   "state-level.png" 1655976888 41179 a335d069ef70e215c684e15c1a289130 ""
   "worldmap1.png" 1655935584 69308 5df80f5db35d95c55e130949ab97ae6b ""
